@@ -1,0 +1,21 @@
+<web-app>
+
+  <display-name>Archetype Created Web Application</display-name>
+
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/resources/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MyApp</servlet-name>
+        <servlet-class>com.gmail.shelkovich.anton.web.HelloServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MyApp</servlet-name>
+        <url-pattern/>
+    </servlet-mapping>
+
+
+
+</web-app>
