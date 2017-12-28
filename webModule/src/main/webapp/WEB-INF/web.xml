@@ -8,11 +8,11 @@
         <url-pattern>/resources/*</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>MyApp</servlet-name>
-        <servlet-class>com.gmail.shelkovich.anton.web.HelloServlet</servlet-class>
+        <servlet-name>MainPage</servlet-name>
+        <servlet-class>com.gmail.shelkovich.anton.web.serlvet.user.MainPage</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>MyApp</servlet-name>
+        <servlet-name>MainPage</servlet-name>
         <url-pattern/>
     </servlet-mapping>
 

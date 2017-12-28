@@ -33,6 +33,6 @@
 
   </dependencies>
   <build>
-    <finalName>webModule</finalName>
+    <finalName>EEShop</finalName>
   </build>
 </project>

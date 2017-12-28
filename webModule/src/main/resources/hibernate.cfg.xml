@@ -11,7 +11,7 @@
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/ee_web_site</property>
         <property name="connection.username">root</property>
-        <property name="connection.password"></property>
+        <property name="connection.password"/>
  
       <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
@@ -31,6 +31,7 @@
         <property name="hbm2ddl.auto">update</property>
 
         <mapping class="com.gmail.shelkovich.anton.repository.model.Role"/>
+
       <!-- Mapping files -->
         <!--<mapping class="antoshk.instagram.entity.State"/>
         <mapping class="antoshk.instagram.entity.CoreTag"/>

@@ -26,16 +26,18 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="${pageContext.request.contextPath}/">Simple Instagram</a>
+      <a id="main_menu_home" class="navbar-brand" href="${pageContext.request.contextPath}/">EE Shop</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-      <c:if test="${user != null}">
-        <li><a href="${pageContext.request.contextPath}/?command=publish">Создать публикацию</a></li>
+      <c:if test="${user != null && canAdmin == true}">
+        <li><a href="${pageContext.request.contextPath}/admin/">Администрировать</a></li>
       </c:if>
-        <li><a href="${pageContext.request.contextPath}/?command=resetDB">Обнулить БД</a></li>
+        <li><a href="${pageContext.request.contextPath}/news">Новости</a></li>
+        <li><a href="${pageContext.request.contextPath}/catalog">Каталог</a></li>
+        <li><a href="${pageContext.request.contextPath}/resetDB">Обнулить БД</a></li>
 
       </ul>
 
@@ -43,15 +45,15 @@
 
         <c:choose>
             <c:when test="${user == null}" >
-                <li><a href="${pageContext.request.contextPath}/?command=login">Войти</a></li>
-                <li><a href="${pageContext.request.contextPath}/?command=register">Регистрация</a></li>
+                <li><a href="${pageContext.request.contextPath}/login">Войти</a></li>
+                <li><a href="${pageContext.request.contextPath}/register">Регистрация</a></li>
             </c:when>
             <c:otherwise>
-                <li><a href="${pageContext.request.contextPath}/?command=profile">Личный кабинет</a></li>
-                <li><a href="${pageContext.request.contextPath}/?command=logout">Выйти</a></li>
+                <li><a href="${pageContext.request.contextPath}/profile">Личный кабинет</a></li>
+                <li><a href="${pageContext.request.contextPath}/logout">Выйти</a></li>
             </c:otherwise>
         </c:choose>
-
+        <li><a href="#">Корзина <span class="badge">0</span></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
