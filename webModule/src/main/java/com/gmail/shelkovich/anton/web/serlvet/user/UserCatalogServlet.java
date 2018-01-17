@@ -6,12 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class MainPage extends HttpServlet {
+public class UserCatalogServlet extends HttpServlet {
 
-    private static final long serialVersionUID = 189461158283277791L;
+    private static final long serialVersionUID = 6304139986858685520L;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher(UserJspPages.MAIN_PAGE).forward(req, resp);
+        req.getRequestDispatcher(UserJsp.MAIN).forward(req, resp);
     }
 }

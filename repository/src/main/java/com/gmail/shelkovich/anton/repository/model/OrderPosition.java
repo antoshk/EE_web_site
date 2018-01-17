@@ -5,24 +5,44 @@ import java.io.Serializable;
 
 
 @Entity
-@Table(name = "T_ORDER_POSITIONS")
+@Table(name = "t_order_positions")
 public class OrderPosition implements Serializable {
 
     private static final long serialVersionUID = 8429427757939707156L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "F_ID")
+    @Column(name = "f_id")
     private Long id;
 
-    @Column(name = "F_COUNT")
+    @Column(name = "f_count")
     private Integer count;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "F_ORDER_ID")
-    private Order order;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "F_PRODUCT_ID")
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinColumn(name = "f_product_id")
     private Product product;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 }
