@@ -1,50 +1,20 @@
-package com.gmail.shelkovich.anton.repository.model;
+package com.gmail.shelkovich.anton.service.model.dto.entity;
 
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
-@Entity
-@Table(name = "t_users")
-public class User implements Serializable {
+public class UserDTO {
 
-    private static final long serialVersionUID = 4367552545254505353L;
-
-    @Id
-    @Column(name="f_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name="f_full_name")
     private String fullName;
-
-    @Column(name="f_email")
     private String email;
-
-    @Column(name="f_phone")
     private String phone;
-
-    @Column(name="f_address")
     private String address;
-
-    @Column(name="f_password")
     private String password;
-
-    @Column(name="f_is_active")
     private Boolean isActive;
-
-    @Column(name="f_additional_info")
     private String additionalInfo;
-
-    @ManyToOne
-    @JoinColumn(name="f_role_id")
-    private Role role;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private List<Order> orders = new ArrayList<>();
+    private Map.Entry<Long, String> role;
+    private List<OrderDTO> orders;
 
     public Long getId() {
         return id;
@@ -110,19 +80,20 @@ public class User implements Serializable {
         this.additionalInfo = additionalInfo;
     }
 
-    public Role getRole() {
+    public Map.Entry<Long, String> getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(Map.Entry<Long, String> role) {
         this.role = role;
     }
 
-    public List<Order> getOrders() {
+    public List<OrderDTO> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<Order> orders) {
+    public void setOrders(List<OrderDTO> orders) {
         this.orders = orders;
     }
+
 }

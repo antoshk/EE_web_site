@@ -20,6 +20,10 @@ public class Order implements Serializable {
     @Column(name="f_status")
     private Integer status;
 
+    @ManyToOne
+    @JoinColumn(name = "f_user_id")
+    private User user;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "f_order_id")
     private List<OrderPosition> orderPositions = new ArrayList<>();
@@ -46,5 +50,13 @@ public class Order implements Serializable {
 
     public void setOrderPositions(List<OrderPosition> orderPositions) {
         this.orderPositions = orderPositions;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
