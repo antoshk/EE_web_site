@@ -1,37 +1,3 @@
 <web-app>
 
-  <display-name>Archetype Created Web Application</display-name>
-
-
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/resources/*</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>MainPage</servlet-name>
-        <servlet-class>com.gmail.shelkovich.anton.web.serlvet.user.UserMainServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>MainPage</servlet-name>
-        <url-pattern/>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>UsersEndpoint</servlet-name>
-        <servlet-class>com.gmail.shelkovich.anton.web.serlvet.admin.UsersApiServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>UsersEndpoint</servlet-name>
-        <url-pattern>/admin/users</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>SingleUserEndpoint</servlet-name>
-        <servlet-class>com.gmail.shelkovich.anton.web.serlvet.admin.SingleUserApiServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>SingleUserEndpoint</servlet-name>
-        <url-pattern>/admin/users/*</url-pattern>
-    </servlet-mapping>
-
 </web-app>

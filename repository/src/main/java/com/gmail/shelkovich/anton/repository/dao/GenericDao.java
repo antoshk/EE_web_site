@@ -15,4 +15,6 @@ public interface GenericDao<T extends Serializable, ID extends Number> {
     void delete(ID id);
 
     T update(T bean);
+
+    List<T> getPage(int count, int page, boolean sortByIdASC);
 }

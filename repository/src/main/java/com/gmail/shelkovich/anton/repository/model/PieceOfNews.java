@@ -23,7 +23,7 @@ public class PieceOfNews implements Serializable {
     @Column(name = "f_title")
     private String newsTilte;
 
-    @Column(name = "f_body")
+    @Column(name = "f_body", columnDefinition = "text")
     private String newsBody;
 
     @Column(name = "f_photo_uri")
