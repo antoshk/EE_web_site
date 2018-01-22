@@ -1,5 +1,7 @@
 package com.gmail.shelkovich.anton.service.model.dto.entity;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -12,10 +14,16 @@ public class PieceOfNewsDTO {
     private String newsBody;
     private String photoURI;
     private UserDTO userDTO;
+    private Integer commentCount;
     private List<CommentDTO> comments = new ArrayList<>();
 
     public Long getId() {
         return id;
+    }
+
+    public String getStringPublicationDate(){
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(publicationDate);
     }
 
     public void setId(Long id) {
@@ -60,6 +68,14 @@ public class PieceOfNewsDTO {
 
     public void setUserDTO(UserDTO userDTO) {
         this.userDTO = userDTO;
+    }
+
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
     }
 
     public List<CommentDTO> getComments() {

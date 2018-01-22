@@ -83,6 +83,7 @@ public class EntityDtoConstructorImpl {
         pieceOfNewsDTO.setPhotoURI(pieceOfNews.getPhotoURI());
         pieceOfNewsDTO.setPublicationDate(pieceOfNews.getPublicationDate());
         pieceOfNewsDTO.setUserDTO(getUserDTO(pieceOfNews.getUser(), false));
+        pieceOfNewsDTO.setCommentCount(pieceOfNews.getComments().size());
         if(loadComments){
             for(Comment comment: pieceOfNews.getComments())
             pieceOfNewsDTO.getComments().add(getCommentDTO(comment, false));

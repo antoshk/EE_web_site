@@ -11,60 +11,25 @@
 			</h3>
 			<div class="well">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-thumbnail" />
-                            </div>
-                            <div class="col-md-8">
-                                <h2>
-                                    ${news.getNewsTilte()}
-                                </h2>
-                                <p>
-                                    ${news.getNewsBody()}
-                                </p>
-                                <p>
-                                    <a class="btn" href="#">View details »</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-thumbnail" />
-                            </div>
-                            <div class="col-md-8">
-                                <h2>
-                                    Heading
-                                </h2>
-                                <p>
-                                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                                </p>
-                                <p>
-                                    <a class="btn" href="#">View details »</a>
-                                </p>
+
+                    <c:forEach var="pieceOfNews" items="${news}">
+                        <div class="card p-3 col-12 col-md-6 col-lg-4">
+                            <div class="card-wrapper">
+                                <div class="card-img">
+                                    <img alt="News Image" src="resources/images/${pieceOfNews.getPhotoURI()}" class="img-thumbnail" />
+                                </div>
+                                <div class="card-box">
+                                    <h4 class="card-title pb-3 mbr-fonts-style display-7">
+                                        ${pieceOfNews.getNewsTilte()}
+                                    </h4>
+                                    <h6>Дата: ${pieceOfNews.getStringPublicationDate()}</h6>
+                                    <p class="mbr-text mbr-fonts-style display-7">
+                                        ${pieceOfNews.getNewsBody()} <a href="http://mobirise.com">Далее...</a>
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <img alt="Bootstrap Image Preview" src="http://lorempixel.com/140/140/" class="img-thumbnail" />
-                            </div>
-                            <div class="col-md-8">
-                                <h2>
-                                    Heading
-                                </h2>
-                                <p>
-                                    Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                                </p>
-                                <p>
-                                    <a class="btn" href="#">View details »</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
                 <div class="row">
                     <div class="col-md-10">

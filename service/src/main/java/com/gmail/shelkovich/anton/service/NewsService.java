@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class TempService {
+public class NewsService {
 
     @Autowired
     @Qualifier("daoFabric")
@@ -28,15 +28,18 @@ public class TempService {
     private EntityDtoConstructorImpl dtoConstructor;
 
     @Transactional(readOnly = true)
-    public List<PieceOfNewsDTO> getNews(){
-        //sessionFactory.getCurrentSession().beginTransaction();
-
-        List<PieceOfNews> news = daoFabric.newsDao.getAll();
+    public List<PieceOfNewsDTO> getMainPageNews() {
+        List<PieceOfNews> news = daoFabric.newsDao.getPage(3,1,false);
         List<PieceOfNewsDTO> newsDTO = new ArrayList<>();
-        for (PieceOfNews pieceOfNews: news){
-            newsDTO.add(dtoConstructor.getPieceOfNewsDTO(pieceOfNews, false));
+        for (PieceOfNews pieceOfNews : news) {
+            PieceOfNewsDTO pieceOfNewsDTO = dtoConstructor.getPieceOfNewsDTO(pieceOfNews, false);
+            String body = pieceOfNewsDTO.getNewsBody();
+            if (body.length() > 140) {
+                body = body.substring(0, 140) + "...";
+            }
+            pieceOfNewsDTO.setNewsBody(body);
+            newsDTO.add(pieceOfNewsDTO);
         }
-        //sessionFactory.getCurrentSession().getTransaction().commit();
         return newsDTO;
     }
 }

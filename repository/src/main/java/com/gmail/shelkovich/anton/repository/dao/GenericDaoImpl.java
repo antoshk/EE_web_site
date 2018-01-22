@@ -1,5 +1,6 @@
 package com.gmail.shelkovich.anton.repository.dao;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ public abstract class GenericDaoImpl<T extends Serializable, ID extends Number> 
     @Autowired
     private SessionFactory sessionFactory;
 
-
     public GenericDaoImpl() {
         this.entityClass = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
@@ -30,7 +30,7 @@ public abstract class GenericDaoImpl<T extends Serializable, ID extends Number> 
 
     @Override
     public T getById(ID id) {
-        return (T) sessionFactory.getCurrentSession().get(entityClass, id);
+        return sessionFactory.getCurrentSession().get(entityClass, id);
     }
 
     @Override
