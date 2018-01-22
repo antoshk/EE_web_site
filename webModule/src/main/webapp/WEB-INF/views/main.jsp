@@ -1,7 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<%@ include file="commonParts/header.jsp" %>
-<%@ include file="commonParts/menu.jsp" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container-fluid">
 
 	<div class="row">
@@ -161,5 +159,3 @@
 		</div>
 	</div>
 </div>
-
-<%@ include file="commonParts/footer.jsp" %>

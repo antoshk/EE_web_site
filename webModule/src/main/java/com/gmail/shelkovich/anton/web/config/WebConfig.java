@@ -1,6 +1,7 @@
 package com.gmail.shelkovich.anton.web.config;
 
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +13,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesView;
+import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
+import javax.servlet.ServletContext;
 import java.util.Properties;
 
 @Configuration
@@ -20,12 +25,36 @@ import java.util.Properties;
 @EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter {
 
+    @Autowired
+    private ServletContext servletContext;
+//    @Bean
+//    public ViewResolver getViewResolver(){
+//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//        resolver.setPrefix("/WEB-INF/views/");
+//        resolver.setSuffix(".jsp");
+//        return resolver;
+//    }
+
     @Bean
-    public ViewResolver getViewResolver(){
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".jsp");
-        return resolver;
+    public TilesViewResolver getTilesViewResolver() {
+        TilesViewResolver tilesViewResolver = new TilesViewResolver();
+        tilesViewResolver.setViewClass(TilesView.class);
+        return tilesViewResolver;
+    }
+
+    /**
+     * <code>Configures Apache tiles definitions bean used by Apache TilesViewResolver to resolve views selected for rendering by @Controllers</code>
+     */
+    @Bean
+    public TilesConfigurer getTilesConfigurer() {
+        TilesConfigurer tilesConfigurer = new TilesConfigurer();
+        tilesConfigurer.setCheckRefresh(true);
+        tilesConfigurer.setDefinitionsFactoryClass(TilesConfig.class);
+
+        // Add apache tiles definitions
+        TilesConfig.addDefinitions(servletContext.getRealPath("/WEB-INF/views/"));
+
+        return tilesConfigurer;
     }
 
     @Override
