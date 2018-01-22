@@ -14,7 +14,7 @@
                         <div class="card p-3 col-12 col-md-6 col-lg-4">
                             <div class="card-wrapper">
                                 <div class="card-img">
-                                    <img alt="News Image" src="resources/images/${pieceOfNews.getPhotoURI()}" class="img-thumbnail" />
+                                    <img alt="News Image" src="resources/images/news/${pieceOfNews.getPhotoURI()}" class="img-thumbnail" />
                                 </div>
                                 <div class="card-box">
                                     <h4 class="card-title pb-3 mbr-fonts-style display-7">

@@ -1,4 +1,4 @@
-package com.gmail.shelkovich.anton.service.Exception;
+package com.gmail.shelkovich.anton.service.DtoConstructor.Exception;
 
 public class IllegalOrderStatusException extends Exception {
     public IllegalOrderStatusException() {

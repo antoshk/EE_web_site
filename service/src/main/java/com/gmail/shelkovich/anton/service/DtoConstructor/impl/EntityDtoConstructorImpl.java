@@ -1,7 +1,8 @@
 package com.gmail.shelkovich.anton.service.DtoConstructor.impl;
 
 import com.gmail.shelkovich.anton.repository.model.*;
-import com.gmail.shelkovich.anton.service.Exception.IllegalOrderStatusException;
+import com.gmail.shelkovich.anton.service.DtoConstructor.EntityDtoConstructor;
+import com.gmail.shelkovich.anton.service.DtoConstructor.Exception.IllegalOrderStatusException;
 import com.gmail.shelkovich.anton.service.model.OrderStatus;
 import com.gmail.shelkovich.anton.service.model.dto.entity.*;
 import org.springframework.stereotype.Component;
@@ -9,8 +10,9 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Component
-public class EntityDtoConstructorImpl {
+public class EntityDtoConstructorImpl implements EntityDtoConstructor {
 
+    @Override
     public ProductDTO getProductDTO(Product product){
         ProductDTO productDTO = new ProductDTO();
             productDTO.setId(product.getId());
@@ -21,6 +23,7 @@ public class EntityDtoConstructorImpl {
         return productDTO;
     }
 
+    @Override
     public OrderDTO getOrderDTO(Order order, UserDTO userDTO){
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setId(order.getId());
@@ -42,6 +45,7 @@ public class EntityDtoConstructorImpl {
         return orderDTO;
     }
 
+    @Override
     public UserDTO getUserDTO(User user, Boolean loadOrders){
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
@@ -65,6 +69,7 @@ public class EntityDtoConstructorImpl {
         return userDTO;
     }
 
+    @Override
     public CommentDTO getCommentDTO(Comment comment, Boolean loadUser){
         CommentDTO commentDTO = new CommentDTO();
         commentDTO.setId(comment.getId());
@@ -75,6 +80,7 @@ public class EntityDtoConstructorImpl {
         return commentDTO;
     }
 
+    @Override
     public PieceOfNewsDTO getPieceOfNewsDTO(PieceOfNews pieceOfNews, Boolean loadComments){
         PieceOfNewsDTO pieceOfNewsDTO = new PieceOfNewsDTO();
         pieceOfNewsDTO.setId(pieceOfNews.getId());

@@ -10,11 +10,11 @@ public interface GenericDao<T extends Serializable, ID extends Number> {
 
     List<T> getAll();
 
-    void delete(T bean);
+    boolean delete(T bean);
 
-    void delete(ID id);
+    boolean delete(ID id);
 
     T update(T bean);
 
-    List<T> getPage(int count, int page, boolean sortByIdASC);
+    List<T> getPage(int count, int page, int sortOrder);
 }

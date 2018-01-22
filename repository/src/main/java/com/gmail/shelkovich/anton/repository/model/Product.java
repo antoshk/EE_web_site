@@ -24,6 +24,9 @@ public class Product implements Serializable {
     @Column(name="f_price")
     private BigDecimal price;
 
+    @Column(name = "f_image_uri")
+    private String imageURI;
+
     @Column(name="f_is_active")
     private Boolean isActive;
 
@@ -61,6 +64,14 @@ public class Product implements Serializable {
 
     public Boolean getActive() {
         return isActive;
+    }
+
+    public String getImageURI() {
+        return imageURI;
+    }
+
+    public void setImageURI(String imageURI) {
+        this.imageURI = imageURI;
     }
 
     public void setActive(Boolean active) {

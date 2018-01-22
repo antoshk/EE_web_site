@@ -1,6 +1,6 @@
 package com.gmail.shelkovich.anton.service.model;
 
-import com.gmail.shelkovich.anton.service.Exception.IllegalOrderStatusException;
+import com.gmail.shelkovich.anton.service.DtoConstructor.Exception.IllegalOrderStatusException;
 
 public class OrderStatus {
     public static final int NEW = 1;
