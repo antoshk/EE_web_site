@@ -1,10 +1,12 @@
 package com.gmail.shelkovich.anton.service.model.dto.entity;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class UserDTO {
+public class UserDTO implements Serializable{
 
+    private static final long serialVersionUID = 3266550439610719796L;
     private Long id;
     private String fullName;
     private String email;

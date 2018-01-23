@@ -1,6 +1,8 @@
-package com.gmail.shelkovich.anton.service.DtoConstructor.Exception;
+package com.gmail.shelkovich.anton.service.DtoConstructor.exception;
 
 public class IllegalOrderStatusException extends Exception {
+    private static final long serialVersionUID = 7474761820605570193L;
+
     public IllegalOrderStatusException() {
         super();
     }

@@ -6,6 +6,7 @@ public class ProductDTO {
     private String name;
     private String description;
     private BigDecimal price;
+    private String imageURI;
     private Boolean isActive;
 
     public Long getId() {
@@ -38,6 +39,14 @@ public class ProductDTO {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getImageURI() {
+        return imageURI;
+    }
+
+    public void setImageURI(String imageURI) {
+        this.imageURI = imageURI;
     }
 
     public Boolean getActive() {

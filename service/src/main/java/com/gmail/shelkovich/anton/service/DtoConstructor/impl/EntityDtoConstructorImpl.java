@@ -2,7 +2,7 @@ package com.gmail.shelkovich.anton.service.DtoConstructor.impl;
 
 import com.gmail.shelkovich.anton.repository.model.*;
 import com.gmail.shelkovich.anton.service.DtoConstructor.EntityDtoConstructor;
-import com.gmail.shelkovich.anton.service.DtoConstructor.Exception.IllegalOrderStatusException;
+import com.gmail.shelkovich.anton.service.DtoConstructor.exception.IllegalOrderStatusException;
 import com.gmail.shelkovich.anton.service.model.OrderStatus;
 import com.gmail.shelkovich.anton.service.model.dto.entity.*;
 import org.springframework.stereotype.Component;
@@ -20,6 +20,7 @@ public class EntityDtoConstructorImpl implements EntityDtoConstructor {
             productDTO.setDescription(product.getDescription());
             productDTO.setPrice(product.getPrice());
             productDTO.setActive(product.getActive());
+            productDTO.setImageURI(product.getImageURI());
         return productDTO;
     }
 
@@ -49,7 +50,7 @@ public class EntityDtoConstructorImpl implements EntityDtoConstructor {
     public UserDTO getUserDTO(User user, Boolean loadOrders){
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
-        userDTO.setRole(new AbstractMap.SimpleEntry<Long, String>(user.getRole().getId(),user.getRole().getName()));
+        userDTO.setRole(new AbstractMap.SimpleEntry<>(user.getRole().getId(),user.getRole().getName()));
         userDTO.setAddress(user.getAddress());
         userDTO.setFullName(user.getFullName());
         userDTO.setAdditionalInfo(user.getAdditionalInfo());

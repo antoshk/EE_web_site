@@ -21,8 +21,8 @@ public class NewsService extends AbstractService {
             String body = pieceOfNewsDTO.getNewsBody();
             if (body.length() > 140) {
                 body = body.substring(0, 140) + "...";
+                pieceOfNewsDTO.setNewsBody(body);
             }
-            pieceOfNewsDTO.setNewsBody(body);
             newsDTO.add(pieceOfNewsDTO);
         }
         return newsDTO;

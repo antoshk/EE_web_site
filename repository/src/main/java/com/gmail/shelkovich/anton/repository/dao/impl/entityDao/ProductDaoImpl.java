@@ -16,7 +16,7 @@ public class ProductDaoImpl extends GenericDaoImpl<Product, Long> {
 
     @Override
     public List<Product> getPage(int count, int page, int sortOrder) {
-        Query query = sessionFactory.getCurrentSession().createQuery("FROM " + entityClass.getName() + " WHERE isActive = true ORDER BY id " + intToOrderInstruction(sortOrder));
+        Query query = sessionFactory.getCurrentSession().createQuery("FROM " + entityClass.getName() + " WHERE isActive = true ORDER BY " + intToOrderInstruction(sortOrder));
         query.setMaxResults(count);
         query.setFirstResult((page - 1) * count);
         return query.list();

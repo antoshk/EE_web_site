@@ -62,18 +62,23 @@ public abstract class GenericDaoImpl<T extends Serializable, ID extends Number> 
 
     @Override
     public List<T> getPage(int count, int page, int sortOrder) {
-        Query query = sessionFactory.getCurrentSession().createQuery("FROM " + entityClass.getName() + " ORDER BY id " + intToOrderInstruction(sortOrder));
+        Query query = sessionFactory.getCurrentSession().createQuery("FROM " + entityClass.getName() + " ORDER BY " + intToOrderInstruction(sortOrder));
         query.setMaxResults(count);
         query.setFirstResult((page - 1) * count);
         return query.list();
     }
 
+    @Override
+    public T getByStringUniqueField(String value){
+        return null;
+    }
+
     protected String intToOrderInstruction(int order){
         switch (order){
-            case 1: return "ASC";
-            case 2: return "DESC";
-            case 3: return "NEWID()";
-            default: return "ASC";
+            case 1: return " id ASC";
+            case 2: return " id DESC";
+            case 3: return " RAND()";
+            default: return " id ASC";
         }
     }
 }
