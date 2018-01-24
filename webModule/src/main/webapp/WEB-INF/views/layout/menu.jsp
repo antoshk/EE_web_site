@@ -37,7 +37,7 @@
                         <li><a href="${pageContext.request.contextPath}/logout">Выйти</a></li>
                 </security:authorize>
 
-                <li><a href="#">Корзина <span class="badge">0</span></a></li>
+                <li id="bucket_counter"><a href="${pageContext.request.contextPath}/bucket">Корзина <span class="badge">${numProductsInBucket}</span></a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

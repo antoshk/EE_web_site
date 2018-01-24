@@ -1,28 +1,38 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<form:form class="form-horizontal" modelAttribute="user" method="POST">
+<form class="form-horizontal" method="POST">
     <fieldset>
 
         <!-- Form Name -->
-        <legend>Войти</legend>
+        <legend>Вход</legend>
+
+        <div>
+            <c:if test="${param.error != null}">
+                <div class="alert alert-danger">
+                    <p>Invalid username and password.</p>
+                </div>
+            </c:if>
+            <c:if test="${param.logout != null}">
+                <div class="alert alert-success">
+                    <p>You have been logged out successfully.</p>
+                </div>
+            </c:if>
+        </div>
 
         <!-- Text input-->
         <div class="form-group">
-            <form:label class="col-md-4 control-label" for="username" path="username">Имя пользователя</form:label>
+            <label class="col-md-4 control-label" for="email" >Email</label>
             <div class="col-md-4">
-                <form:input id="login_email" name="login_email" type="text" placeholder="" class="form-control input-md" required="" path="username"/>
-
+                <input id="email" name="email" type="text" placeholder="" class="form-control input-md" required="" />
             </div>
         </div>
 
         <!-- Password input-->
         <div class="form-group">
-            <form:label class="col-md-4 control-label" for="password" path="password">Пароль</form:label>
+            <label class="col-md-4 control-label" for="password" path="password">Пароль</label>
             <div class="col-md-4">
-                <form:input id="login_password" name="login_password" type="password" placeholder="" class="form-control input-md" required="" path="password"/>
-
+                <input id="password" name="password" type="password" placeholder="" class="form-control input-md" required="" />
             </div>
         </div>
 
@@ -35,5 +45,5 @@
         </div>
 
     </fieldset>
-</form:form>
+</form>
 

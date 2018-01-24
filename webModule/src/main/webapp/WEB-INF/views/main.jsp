@@ -1,6 +1,18 @@
 
-
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script>
+$(document).ready(function() {
+    $(document).on("click", ".addToBucket",
+    function(){
+        $.post("bucket/ajax/add/"+$(this).attr("productId"), {productCount: 1}, function(data){
+            $("#bucket_counter").html(data);
+            alert("Товар добавлен");
+        });
+    });
+});
+</script>
+
 <div class="container-fluid">
 
 	<div class="row">
@@ -66,7 +78,7 @@
                                         Цена: ${product.getPrice()}
                                     </p>
                                     <p>
-                                        <a class="btn btn-primary" href="#">В корзину</a> <a class="btn" href="#">Подробнее</a>
+                                        <button class="btn btn-primary addToBucket" productId="${product.getId()}">В корзину</button><a class="btn" href="#">Подробнее</a>
                                     </p>
                                 </div>
                             </div>

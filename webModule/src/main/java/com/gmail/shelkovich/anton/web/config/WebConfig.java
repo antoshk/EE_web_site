@@ -57,7 +57,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         tilesConfigurer.setDefinitionsFactoryClass(TilesConfig.class);
 
         // Add apache tiles definitions
-        TilesConfig.addDefinitions(servletContext.getRealPath("/WEB-INF/views/"));
+        TilesConfig.addDefinitions(servletContext.getRealPath("/WEB-INF/views/"), false);
+        TilesConfig.addDefinitions(servletContext.getRealPath("/WEB-INF/views/ajax/"), true);
 
         return tilesConfigurer;
     }

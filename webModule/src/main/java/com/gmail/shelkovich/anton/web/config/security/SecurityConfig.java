@@ -26,13 +26,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/user/**").hasRole("USER")
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/login").anonymous()
+               // .antMatchers("/login").anonymous()
                 .antMatchers("/**").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
+                    .usernameParameter("email")
                     .successForwardUrl("/")
                     .failureUrl("/login?error=true")
+
                 .and()
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/")
                 .and().csrf().disable();

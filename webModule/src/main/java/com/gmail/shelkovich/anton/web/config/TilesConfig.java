@@ -16,6 +16,7 @@ public final class TilesConfig implements DefinitionsFactory {
     private static final Map<String, Definition> tilesDefinitions = new HashMap<>();
     private static final Attribute BASE_TEMPLATE = new Attribute("/WEB-INF/views/layout/defaultLayout.jsp");
     private static final String viewsDir = "/WEB-INF/views/";
+    private static final String ajaxViewsDir = "/WEB-INF/views/ajax/";
 
 
     @Override
@@ -42,10 +43,14 @@ public final class TilesConfig implements DefinitionsFactory {
         tilesDefinitions.put(name, new Definition(name, BASE_TEMPLATE, attributes));
     }
 
+    private static void addAjaxDef(String name, String body){
+        tilesDefinitions.put(name, new Definition(name, new Attribute(body), new HashMap<>()));
+    }
+
     /**
      * <code>Add Apache tiles definitions</code>
      */
-    public static void addDefinitions(String rootDir){
+    public static void addDefinitions(String rootDir, boolean isAjax){
 
         File dir = new File(rootDir);
         File[] files= dir.listFiles();
@@ -54,7 +59,11 @@ public final class TilesConfig implements DefinitionsFactory {
                 if (file.isFile() && file.getName().contains(".jsp")) {
                     String filename = file.getName();
                     filename = filename.substring(0, filename.indexOf("."));
-                    addDefaultLayoutDef(filename, filename + " page", viewsDir + filename + ".jsp");
+                    if (isAjax){
+                        addAjaxDef(filename, ajaxViewsDir + filename + ".jsp");
+                    } else {
+                        addDefaultLayoutDef(filename, filename + " page", viewsDir + filename + ".jsp");
+                    }
                 }
             }
         } else {

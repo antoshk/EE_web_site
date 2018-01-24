@@ -1,6 +1,5 @@
 package com.gmail.shelkovich.anton.web.controller;
 
-import com.gmail.shelkovich.anton.service.model.dto.entity.UserDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +12,8 @@ public class LoginPageController {
 
     @RequestMapping(value="/login")
     public String loginPage(ModelMap model, HttpSession session) throws IOException {
-        model.addAttribute("user", new UserDTO());
+        //model.addAttribute("user", new UserDTO());
         return "login";
     }
-
 
 }
