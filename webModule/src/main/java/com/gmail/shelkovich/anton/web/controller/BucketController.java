@@ -44,4 +44,18 @@ public class BucketController {
         return "ajax_bucketList";
     }
 
+    @RequestMapping(value="/ajax/increase-product-count/{productId}")
+    public String bucketListIncrease(@PathVariable Long productId, ModelMap model) throws IOException {
+        bucketService.changeCount(productId,bucketService.getCount(productId)+1);
+        model.addAttribute("bucket", bucketService.getAll());
+        return "ajax_bucketList";
+    }
+
+    @RequestMapping(value="/ajax/decrease-product-count/{productId}")
+    public String bucketListDecrease(@PathVariable Long productId, ModelMap model) throws IOException {
+        bucketService.changeCount(productId,bucketService.getCount(productId)-1);
+        model.addAttribute("bucket", bucketService.getAll());
+        return "ajax_bucketList";
+    }
+
 }

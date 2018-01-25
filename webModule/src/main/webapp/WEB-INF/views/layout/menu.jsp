@@ -30,7 +30,7 @@
 
                 <security:authorize access="isAnonymous()">
                     <li><a href="${pageContext.request.contextPath}/login">Войти</a></li>
-                    <li><a href="${pageContext.request.contextPath}/register">Регистрация</a></li>
+                    <li><a href="${pageContext.request.contextPath}/reg">Регистрация</a></li>
                 </security:authorize>
                 <security:authorize access="isAuthenticated()">
                         <li><a href="${pageContext.request.contextPath}/profile">Личный кабинет</a></li>

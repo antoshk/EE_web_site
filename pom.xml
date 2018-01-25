@@ -20,6 +20,7 @@
         <cglib.version>2.2.2</cglib.version>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <hibernate.version>5.2.12.Final</hibernate.version>
     </properties>
 
 

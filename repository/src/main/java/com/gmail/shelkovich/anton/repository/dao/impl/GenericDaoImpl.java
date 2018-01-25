@@ -73,6 +73,18 @@ public abstract class GenericDaoImpl<T extends Serializable, ID extends Number> 
         return null;
     }
 
+    @Override
+    public Integer getRowCount(){
+        String countStr = sessionFactory.getCurrentSession().createQuery("SELECT COUNT(*) as count FROM " + entityClass.getName()).uniqueResult().toString();
+        Integer count = null;
+        try {
+            count = Integer.parseInt(countStr);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return count;
+    }
+
     protected String intToOrderInstruction(int order){
         switch (order){
             case 1: return " id ASC";

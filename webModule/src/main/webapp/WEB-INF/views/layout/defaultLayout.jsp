@@ -2,6 +2,7 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 
 <tiles:insertAttribute name="header" />
@@ -18,10 +19,10 @@
     <div class="row">
         <div class="col-md-12">
             <security:authorize access="isAuthenticated()">
-                <p>Вы вошли как: ${userIdentifier}</p>
+                <p><spring:message code="layout.enteredAsUser"/> ${userIdentifier}</p>
             </security:authorize>
             <security:authorize access="isAnonymous()">
-                <p>Вы не авторизировались. Для совершения покупок необходима авторизация.</p>
+                <p><spring:message code="layout.enteredAsAnonymous"/></p>
             </security:authorize>
         </div>
     </div>

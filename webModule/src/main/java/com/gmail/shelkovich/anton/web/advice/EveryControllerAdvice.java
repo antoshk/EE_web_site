@@ -1,4 +1,4 @@
-package com.gmail.shelkovich.anton.web.controller;
+package com.gmail.shelkovich.anton.web.advice;
 
 import com.gmail.shelkovich.anton.service.BucketService;
 import com.gmail.shelkovich.anton.service.UserService;

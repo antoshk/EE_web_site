@@ -31,6 +31,10 @@ public class Bucket {
         }
     }
 
+    public int getCount(ProductDTO product){
+        return products.get(product);
+    }
+
     public Set<Map.Entry<ProductDTO, Integer>> getAll(){
         return products.entrySet();
     }

@@ -33,6 +33,18 @@ public class ProductDaoImpl extends GenericDaoImpl<Product, Long> {
     }
 
     @Override
+    public Integer getRowCount(){
+        String countStr = sessionFactory.getCurrentSession().createQuery("SELECT COUNT(*) as count FROM " + entityClass.getName()+" WHERE isActive = true").uniqueResult().toString();
+        Integer count = null;
+        try {
+            count = Integer.parseInt(countStr);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    @Override
     public boolean delete(Product bean) {
         if (bean == null) {
             return false;

@@ -14,9 +14,9 @@
         <c:forEach var="entry" items="${bucket}">
             <tr>
                 <th scope="row">${iter}</th>
-                <td><a href="${pageContext.request.contextPath}/products/${entry.getKey().getId()}">${entry.getKey().getName()}</a></td>
+                <td><a href="${pageContext.request.contextPath}/catalog/${entry.getKey().getId()}">${entry.getKey().getName()}</a></td>
                 <td>${entry.getValue()}</td>
-                <td><button class="btn btn-default">-</button><button class="btn btn-default" type="submit">+</button></td>
+                <td><button class="btn btn-default decreaseCount" productId="${entry.getKey().getId()}">-</button><button class="btn btn-default increaseCount" type="submit" productId="${entry.getKey().getId()}">+</button></td>
             </tr>
             <c:set var="iter" value="${iter+1}"/>
         </c:forEach>

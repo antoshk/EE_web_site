@@ -19,4 +19,6 @@ public interface GenericDao<T extends Serializable, ID extends Number> {
     List<T> getPage(int count, int page, int sortOrder);
 
     T getByStringUniqueField(String value);
+
+    Integer getRowCount();
 }

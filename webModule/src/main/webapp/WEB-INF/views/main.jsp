@@ -5,7 +5,7 @@
 $(document).ready(function() {
     $(document).on("click", ".addToBucket",
     function(){
-        $.post("bucket/ajax/add/"+$(this).attr("productId"), {productCount: 1}, function(data){
+        $.post("${pageContext.request.contextPath}/bucket/ajax/add/"+$(this).attr("productId"), {productCount: 1}, function(data){
             $("#bucket_counter").html(data);
             alert("Товар добавлен");
         });
@@ -66,7 +66,7 @@ $(document).ready(function() {
                     <c:forEach var="product" items="${products}">
                         <div class="col-sm-4">
                             <div class="thumbnail">
-                                <img alt="EE-shop product image" src="resources/images/products/${product.getImageURI()}" class="img-rounded"/>
+                                <img alt="EE-shop product image" src="${pageContext.request.contextPath}/resources/images/products/${product.getImageURI()}" class="img-rounded"/>
                                 <div class="caption">
                                     <h3>
                                         ${product.getName()}
@@ -94,7 +94,7 @@ $(document).ready(function() {
                     <div class="col-md-10">
                     </div>
                     <div class="col-md-2">
-                         <a href="#" class="btn btn-primary" type="button">Больше товаров</a>
+                         <a href="${pageContext.request.contextPath}/catalog" class="btn btn-primary" type="button">Больше товаров</a>
                     </div>
                 </div>
 			</div>

@@ -1,18 +1,37 @@
 package com.gmail.shelkovich.anton.service.model.dto.entity;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.NotBlank;
+
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
+
 
 public class UserDTO implements Serializable{
 
     private static final long serialVersionUID = 3266550439610719796L;
     private Long id;
+
+    @NotEmpty(message = "{reg.user.fullName}")
     private String fullName;
     private String email;
     private String phone;
+
+
     private String address;
+
+    @NotNull
+    @Size(min=6, max=25)
     private String password;
+
+    @NotNull
+    @Size(min=6, max=25)
+    private String passwordRep;
     private Boolean isActive;
     private String additionalInfo;
     private Map.Entry<Long, String> role;
@@ -64,6 +83,14 @@ public class UserDTO implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPasswordRep() {
+        return passwordRep;
+    }
+
+    public void setPasswordRep(String passwordRep) {
+        this.passwordRep = passwordRep;
     }
 
     public Boolean getActive() {

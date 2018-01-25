@@ -3,6 +3,8 @@ package com.gmail.shelkovich.anton.service;
 import com.gmail.shelkovich.anton.service.model.AppUserDetails;
 import com.gmail.shelkovich.anton.service.model.dto.entity.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserService extends AbstractService {
+
+    @Autowired
+    AppUserDetailsService userDetailsService;
 
     @Transactional
     public UserDTO getUserDTOByEmail(String email){
@@ -35,4 +40,15 @@ public class UserService extends AbstractService {
             return principal.toString();
         }
     }
+
+//    public void autoLogin(String username, String password) {
+//        UserDetails user = this.userDetailsService.loadUserByUsername(username);
+//        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(),
+//                user.getAuthorities());
+//        this.authenticationManager.authenticate(token);
+//        if (token.isAuthenticated()) {
+//            SecurityContextHolder.getContext().setAuthentication(token);
+//        }
+//
+//    }
 }

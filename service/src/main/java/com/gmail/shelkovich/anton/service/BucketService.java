@@ -35,6 +35,12 @@ public class BucketService extends AbstractService{
         bucket.changeCount(dtoConstructor.getProductDTO(product), newCount);
     }
 
+    @Transactional(readOnly = true)
+    public int getCount(Long productId){
+        Product product = daoFabric.productDao.getById(productId);
+        return bucket.getCount(dtoConstructor.getProductDTO(product));
+    }
+
     public Set<Map.Entry<ProductDTO, Integer>> getAll(){
         return bucket.getAll();
     }
