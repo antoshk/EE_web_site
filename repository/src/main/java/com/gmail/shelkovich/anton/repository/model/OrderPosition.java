@@ -15,11 +15,11 @@ public class OrderPosition implements Serializable {
     @Column(name = "f_id")
     private Long id;
 
-    @Column(name = "f_count")
+    @Column(name = "f_count", nullable = false)
     private Integer count;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "f_product_id")
+    @ManyToOne
+    @JoinColumn(name = "f_product_id", nullable = false)
     private Product product;
 
     public Long getId() {
@@ -38,6 +38,7 @@ public class OrderPosition implements Serializable {
         this.count = count;
     }
 
+
     public Product getProduct() {
         return product;
     }
@@ -45,4 +46,5 @@ public class OrderPosition implements Serializable {
     public void setProduct(Product product) {
         this.product = product;
     }
+
 }

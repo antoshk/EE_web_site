@@ -61,15 +61,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- CGLib for @Configuration -->
-        <dependency>
-            <groupId>cglib</groupId>
-            <artifactId>cglib-nodep</artifactId>
-            <version>${cglib.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-
-    </dependencies>
+   </dependencies>
 
 
     <build>

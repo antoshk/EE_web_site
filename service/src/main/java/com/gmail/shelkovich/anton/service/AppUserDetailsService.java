@@ -1,7 +1,7 @@
 package com.gmail.shelkovich.anton.service;
 
 import com.gmail.shelkovich.anton.service.model.AppUserDetails;
-import com.gmail.shelkovich.anton.service.model.dto.entity.UserDTO;
+import com.gmail.shelkovich.anton.service.model.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,12 +12,11 @@ import org.springframework.stereotype.Service;
 public class AppUserDetailsService implements UserDetailsService {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserDTO user = userService.getUserDTOByEmail(email);
-        System.out.println();
+        UserDTO user = userService.getByEmail(email);
         if(user == null){
             throw new UsernameNotFoundException(email);
         }

@@ -2,8 +2,9 @@ package com.gmail.shelkovich.anton.service;
 
 import com.gmail.shelkovich.anton.repository.dao.SortOrder;
 import com.gmail.shelkovich.anton.repository.model.Product;
+import com.gmail.shelkovich.anton.service.converter.ProductConverter;
 import com.gmail.shelkovich.anton.service.model.Pagination;
-import com.gmail.shelkovich.anton.service.model.dto.entity.ProductDTO;
+import com.gmail.shelkovich.anton.service.model.dto.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,24 +16,27 @@ import java.util.List;
 public class ProductService extends AbstractService {
 
     @Autowired
-    Pagination pagination;
+    private Pagination pagination;
 
     @Transactional(readOnly = true)
     public List<ProductDTO> getMainPageProducts(){
-        return getProductsByPageAndOrder(6, 1, SortOrder.RANDOM);
+        return getByPageAndOrder(6, 1, SortOrder.RANDOM);
     }
 
     @Transactional(readOnly = true)
-    public List<ProductDTO> getProductsByPage(int count, int page) {
-        return getProductsByPageAndOrder(count, page, SortOrder.ASC);
+    public List<ProductDTO> getByPage(int count, Integer page) {
+        return getByPageAndOrder(count, page, SortOrder.ASC);
     }
 
     @Transactional(readOnly = true)
-    public List<ProductDTO> getProductsByPageAndOrder(int count, int page, int order){
+    public List<ProductDTO> getByPageAndOrder(int count, Integer page, SortOrder order){
+        if (page == null){
+            page = 1;
+        }
         List<ProductDTO> productDTOList = new ArrayList<>();
-        List<Product> products = daoFabric.productDao.getPage(count, page, order);
+        List<Product> products = daoList.getProductDao().getPage(count, page, order);
         for(Product product: products){
-            ProductDTO productDTO = dtoConstructor.getProductDTO(product);
+            ProductDTO productDTO = ProductConverter.toDTO(product);
             String description = productDTO.getDescription();
             if (description.length() > 140) {
                 description = description.substring(0, 140) + "...";
@@ -44,20 +48,20 @@ public class ProductService extends AbstractService {
     }
 
     @Transactional(readOnly = true)
-    public ProductDTO getProductById(long id){
-        Product product = daoFabric.productDao.getById(id);
-        ProductDTO productDTO = dtoConstructor.getProductDTO(product);
+    public ProductDTO getById(long id){
+        Product product = daoList.getProductDao().getById(id);
+        ProductDTO productDTO = ProductConverter.toDTO(product);
         return productDTO;
     }
 
     @Transactional(readOnly = true)
     public int getPageCount(int perPage){
-        int total = daoFabric.productDao.getRowCount();
+        int total = daoList.getProductDao().getRowCount();
         return calculatePageCount(total, perPage);
     }
 
     @Transactional(readOnly = true)
-    public Pagination getPagination(int itemsPerPage, int currentPage){
+    public Pagination getPagination(int itemsPerPage, Integer currentPage){
         return getAbstractPagination(pagination, currentPage, getPageCount(itemsPerPage));
     }
 

@@ -4,8 +4,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
 
 @Entity
 @Table(name = "t_orders")
@@ -17,15 +15,16 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="f_status")
-    private Integer status;
+    @Column(name="f_status", columnDefinition = "enum")
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
 
     @ManyToOne
     @JoinColumn(name = "f_user_id")
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "f_order_id")
+    @JoinColumn(name = "F_ORDER_ID", nullable = false)
     private List<OrderPosition> orderPositions = new ArrayList<>();
 
     public Long getId() {
@@ -36,11 +35,11 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public Integer getStatus() {
+    public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
 

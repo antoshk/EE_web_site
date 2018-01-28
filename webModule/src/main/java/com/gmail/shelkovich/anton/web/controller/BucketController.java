@@ -2,7 +2,6 @@ package com.gmail.shelkovich.anton.web.controller;
 
 
 import com.gmail.shelkovich.anton.service.BucketService;
-import com.gmail.shelkovich.anton.service.model.dto.entity.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Map;
 
 @Controller
 @RequestMapping(value="/bucket")
@@ -22,9 +19,8 @@ public class BucketController {
     @Autowired
     BucketService bucketService;
 
-    @RequestMapping(value="", method = RequestMethod.GET)
-    public String bucketPage(ModelMap model, HttpSession session) throws IOException {
-        //model.addAttribute("bucket", bucketService.getAll());
+    @RequestMapping(method = RequestMethod.GET)
+    public String bucketPage(ModelMap model) throws IOException {
         return "bucket";
     }
 
@@ -34,7 +30,7 @@ public class BucketController {
             count = 1;
         }
         bucketService.addToBucket(productId, count);
-        model.addAttribute("currentBucketTotal", bucketService.getTotal());
+        model.addAttribute("currentBucketTotal", bucketService.getTotalCount());
         return "ajax_bucketCounter";
     }
 
@@ -46,14 +42,14 @@ public class BucketController {
 
     @RequestMapping(value="/ajax/increase-product-count/{productId}")
     public String bucketListIncrease(@PathVariable Long productId, ModelMap model) throws IOException {
-        bucketService.changeCount(productId,bucketService.getCount(productId)+1);
+        bucketService.changeProductCount(productId,bucketService.getProductCount(productId)+1);
         model.addAttribute("bucket", bucketService.getAll());
         return "ajax_bucketList";
     }
 
     @RequestMapping(value="/ajax/decrease-product-count/{productId}")
     public String bucketListDecrease(@PathVariable Long productId, ModelMap model) throws IOException {
-        bucketService.changeCount(productId,bucketService.getCount(productId)-1);
+        bucketService.changeProductCount(productId,bucketService.getProductCount(productId)-1);
         model.addAttribute("bucket", bucketService.getAll());
         return "ajax_bucketList";
     }

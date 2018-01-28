@@ -36,10 +36,10 @@
 
         <!-- Password input-->
         <div class="form-group">
-            <label class="col-md-4 control-label" for="passwordrepeate">Повторите пароль</label>
+            <label class="col-md-4 control-label" for="confirmPassword">Повторите пароль</label>
             <div class="col-md-4">
-                <form:input id="passwordrepeate" name="passwordrepeate" type="password" placeholder="" class="form-control input-md" required="" path="passwordRep"/>
-                <p class="bg-danger"><form:errors path="passwordRep" cssClass="error" /></p>
+                <form:input id="confirmPassword" name="confirmPassword" type="password" placeholder="" class="form-control input-md" required="" path="confirmPassword"/>
+                <p class="bg-danger"><form:errors path="confirmPassword" cssClass="error" /></p>
             </div>
         </div>
 

@@ -1,6 +1,7 @@
 package com.gmail.shelkovich.anton.repository.dao.impl.entityDao;
 
 import com.gmail.shelkovich.anton.repository.dao.HibernateUtils;
+import com.gmail.shelkovich.anton.repository.dao.impl.ProductDaoImpl;
 import com.gmail.shelkovich.anton.repository.model.Product;
 import org.hibernate.Session;
 

@@ -1,6 +1,6 @@
 package com.gmail.shelkovich.anton.service.model;
 
-import com.gmail.shelkovich.anton.service.model.dto.entity.UserDTO;
+import com.gmail.shelkovich.anton.service.model.dto.UserDTO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,7 +15,7 @@ public class AppUserDetails implements UserDetails {
 
     public AppUserDetails(UserDTO userDTO){
         this.userDTO = userDTO;
-        this.grantedAuthorities = Collections.singletonList(new SimpleGrantedAuthority(userDTO.getRole().getValue()));
+        this.grantedAuthorities = Collections.singletonList(new SimpleGrantedAuthority(userDTO.getRole().name()));
     }
 
     public UserDTO getUserDTO() {

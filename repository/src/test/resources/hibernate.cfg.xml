@@ -22,6 +22,5 @@
         <mapping class="com.gmail.shelkovich.anton.repository.model.Order"/>
         <mapping class="com.gmail.shelkovich.anton.repository.model.User"/>
         <mapping class="com.gmail.shelkovich.anton.repository.model.Feedback"/>
-        <mapping class="com.gmail.shelkovich.anton.repository.model.Role"/>
     </session-factory>
 </hibernate-configuration>

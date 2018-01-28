@@ -16,9 +16,7 @@ public interface GenericDao<T extends Serializable, ID extends Number> {
 
     T update(T bean);
 
-    List<T> getPage(int count, int page, int sortOrder);
-
-    T getByStringUniqueField(String value);
+    List<T> getPage(int count, int page, SortOrder sortOrder);
 
     Integer getRowCount();
 }

@@ -12,7 +12,6 @@ public class LoginPageController {
 
     @RequestMapping(value="/login")
     public String loginPage(ModelMap model, HttpSession session) throws IOException {
-        //model.addAttribute("user", new UserDTO());
         return "login";
     }
 

@@ -1,11 +1,12 @@
 package com.gmail.shelkovich.anton.repository.model;
 
 
+import com.gmail.shelkovich.anton.repository.dao.Role;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "t_users")
@@ -39,8 +40,8 @@ public class User implements Serializable {
     @Column(name="f_additional_info")
     private String additionalInfo;
 
-    @ManyToOne
-    @JoinColumn(name="f_role_id")
+    @Column(name="f_role", columnDefinition = "enum")
+    @Enumerated(EnumType.STRING)
     private Role role;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")

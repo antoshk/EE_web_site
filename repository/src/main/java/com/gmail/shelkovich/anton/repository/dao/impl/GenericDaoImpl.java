@@ -1,14 +1,13 @@
 package com.gmail.shelkovich.anton.repository.dao.impl;
 
 import com.gmail.shelkovich.anton.repository.dao.GenericDao;
-import org.hibernate.Session;
+import com.gmail.shelkovich.anton.repository.dao.SortOrder;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 @Component
@@ -26,7 +25,7 @@ public abstract class GenericDaoImpl<T extends Serializable, ID extends Number> 
 
     @Override
     public T add(T bean) {
-        sessionFactory.getCurrentSession().persist(bean);
+        sessionFactory.getCurrentSession().merge(bean);
         return bean;
     }
 
@@ -61,16 +60,11 @@ public abstract class GenericDaoImpl<T extends Serializable, ID extends Number> 
     }
 
     @Override
-    public List<T> getPage(int count, int page, int sortOrder) {
-        Query query = sessionFactory.getCurrentSession().createQuery("FROM " + entityClass.getName() + " ORDER BY " + intToOrderInstruction(sortOrder));
+    public List<T> getPage(int count, int page, SortOrder sortOrder) {
+        Query query = sessionFactory.getCurrentSession().createQuery("FROM " + entityClass.getName() + " ORDER BY " + OrderToInstruction(sortOrder));
         query.setMaxResults(count);
         query.setFirstResult((page - 1) * count);
         return query.list();
-    }
-
-    @Override
-    public T getByStringUniqueField(String value){
-        return null;
     }
 
     @Override
@@ -85,11 +79,11 @@ public abstract class GenericDaoImpl<T extends Serializable, ID extends Number> 
         return count;
     }
 
-    protected String intToOrderInstruction(int order){
+    protected String OrderToInstruction(SortOrder order){
         switch (order){
-            case 1: return " id ASC";
-            case 2: return " id DESC";
-            case 3: return " RAND()";
+            case ASC: return " id ASC";
+            case DESC: return " id DESC";
+            case RANDOM: return " RAND()";
             default: return " id ASC";
         }
     }
