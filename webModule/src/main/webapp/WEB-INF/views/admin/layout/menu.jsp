@@ -15,29 +15,24 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
             <ul class="nav navbar-nav">
-                <security:authorize access="isAuthenticated()">
-                    <security:authorize access="hasRole('ADMIN') or hasRole('SUPERADMIN')">
-                        <li><a href="${pageContext.request.contextPath}/admin/">Администрировать</a></li>
+                <security:authorize access="hasRole('ADMIN') or hasRole('SUPERADMIN')">
+                    <security:authorize access="hasRole('SUPERADMIN')">
+                        <li><a href="${pageContext.request.contextPath}/admin/users">Пользователи</a></li>
                     </security:authorize>
+                    <li><a href="${pageContext.request.contextPath}/admin/orders">Заказы</a></li>
+                    <li><a href="${pageContext.request.contextPath}/admin/products">Товары</a></li>
+                    <li><a href="${pageContext.request.contextPath}/admin/news">Новости</a></li>
+                    <li><a href="${pageContext.request.contextPath}/admin/resetDB">Обнулить БД</a></li>
                 </security:authorize>
-                <li><a href="${pageContext.request.contextPath}/news">Новости</a></li>
-                <li><a href="${pageContext.request.contextPath}/catalog">Каталог</a></li>
-                <li><a href="${pageContext.request.contextPath}/resetDB">Обнулить БД</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-
-                <security:authorize access="isAnonymous()">
-                    <li><a href="${pageContext.request.contextPath}/login?from=${currentURI}">Войти</a></li>
-                    <li><a href="${pageContext.request.contextPath}/reg">Регистрация</a></li>
-                </security:authorize>
                 <security:authorize access="isAuthenticated()">
                         <li><a href="${pageContext.request.contextPath}/profile">Личный кабинет</a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Выйти</a></li>
                 </security:authorize>
-
-                <li id="bucket_counter"><a href="${pageContext.request.contextPath}/bucket">Корзина <span class="badge">${bucketService.getTotalCount()}</span></a></li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

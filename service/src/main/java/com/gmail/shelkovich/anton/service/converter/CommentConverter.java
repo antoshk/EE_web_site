@@ -3,7 +3,7 @@ package com.gmail.shelkovich.anton.service.converter;
 import com.gmail.shelkovich.anton.repository.model.Comment;
 import com.gmail.shelkovich.anton.service.model.dto.CommentDTO;
 
-public class CommentsConverter {
+public class CommentConverter {
 
     public static CommentDTO toDTO(Comment comment, Boolean loadUser){
         CommentDTO commentDTO = new CommentDTO();

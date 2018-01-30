@@ -15,12 +15,12 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="f_status", columnDefinition = "enum")
+    @Column(name="f_status", columnDefinition = "enum", nullable = false)
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "f_user_id")
+    @JoinColumn(name = "f_user_id", nullable = false)
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL)

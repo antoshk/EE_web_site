@@ -13,7 +13,7 @@
             <p>Адрес доставки: ${user.getAddress()}</p>
             <p>Контактный email: ${user.getEmail()}</p>
 
-            <c:if test="${numProductsInBucket>0}">
+            <c:if test="${bucketService.getTotalCount()>0}">
                 <div class="well">
                     <div class="row">
                         <div class="col-md-12" id="bucket-container">
@@ -28,7 +28,7 @@
                                 </thead>
                                 <tbody>
                                     <c:set var="iter" value="1"/>
-                                    <c:forEach var="entry" items="${bucket}">
+                                    <c:forEach var="entry" items="${bucketService.getAll()}">
                                         <tr>
                                             <th scope="row">${iter}</th>
                                             <td>${entry.getKey().getName()}</td>
@@ -48,7 +48,7 @@
                         <div class="col-md-10">
                         </div>
                         <div class="col-md-2">
-                             <a href="${pageContext.request.contextPath}/order/add" class="btn btn-primary" type="button">Подтвердить заказ</a>
+                            <form action="${pageContext.request.contextPath}/order" method="POST"><button type="submit" class="btn btn-primary">Подтвердить заказ</button></form>
                         </div>
                     </div>
                 </div>

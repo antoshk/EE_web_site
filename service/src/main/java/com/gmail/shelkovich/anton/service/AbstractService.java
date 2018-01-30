@@ -9,16 +9,13 @@ public abstract class AbstractService {
     @Autowired
     protected DaoList daoList;
 
-    int calculatePageCount(int total, int perPage) {
-        return (int) Math.ceil(total / (double) perPage);
-    }
-
-    Pagination getAbstractPagination(Pagination pagination, Integer currentPage, int totalItems) {
+    Pagination getAbstractPagination(Pagination pagination, Integer currentPage, int totalItems, int itemsPerPage) {
+        int pageCount = (int) Math.ceil(totalItems / (double) itemsPerPage);
         if (currentPage == null){
             currentPage = 1;
         }
         pagination.setCurrentPage(currentPage);
-        pagination.setTotalPages(totalItems);
+        pagination.setTotalPages(pageCount);
         if (currentPage < pagination.getTotalPages()) {
             pagination.setNextPage(currentPage + 1);
         } else {

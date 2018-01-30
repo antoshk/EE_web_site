@@ -1,6 +1,0 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<%@ include file="commonParts/header.jsp" %>
-
-
-
-<%@ include file="commonParts/footer.jsp" %>

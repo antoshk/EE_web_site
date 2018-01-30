@@ -44,7 +44,7 @@ public class OrderController {
         return "confirmOrder";
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.POST)
     public String addOrder(ModelMap model) throws IOException {
         if(bucketService.getTotalCount()<1) {
             SecurityContextHolder.getContext().setAuthentication(null);

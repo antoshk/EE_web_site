@@ -3,7 +3,6 @@ package com.gmail.shelkovich.anton.repository.model;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Set;
 
 @Entity
 @Table(name = "t_products")
@@ -15,19 +14,19 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="f_name")
+    @Column(name="f_name", nullable = false)
     private String name;
 
-    @Column(name="f_description", columnDefinition = "text")
+    @Column(name="f_description", columnDefinition = "text", nullable = false)
     private String description;
 
-    @Column(name="f_price")
+    @Column(name="f_price", nullable = false)
     private BigDecimal price;
 
-    @Column(name = "f_image_uri")
+    @Column(name = "f_image_uri", nullable = false)
     private String imageURI;
 
-    @Column(name="f_is_active")
+    @Column(name="f_is_active", nullable = false)
     private Boolean isActive;
 
     public Long getId() {

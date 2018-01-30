@@ -17,7 +17,7 @@ public class NewsConverter {
         pieceOfNewsDTO.setCommentCount(pieceOfNews.getComments().size());
         if(loadComments){
             for(Comment comment: pieceOfNews.getComments())
-                pieceOfNewsDTO.getComments().add(CommentsConverter.toDTO(comment, false));
+                pieceOfNewsDTO.getComments().add(CommentConverter.toDTO(comment, true));
         }
         return pieceOfNewsDTO;
     }
@@ -34,7 +34,7 @@ public class NewsConverter {
 
         if(setComments && pieceOfNewsDTO.getComments().size() > 0){
             for(CommentDTO commentDTO: pieceOfNewsDTO.getComments()){
-                pieceOfNews.getComments().add(CommentsConverter.fromDTO(commentDTO));
+                pieceOfNews.getComments().add(CommentConverter.fromDTO(commentDTO));
             }
         }
         return pieceOfNews;

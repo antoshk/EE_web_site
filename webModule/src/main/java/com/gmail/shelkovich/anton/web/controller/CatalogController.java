@@ -39,7 +39,6 @@ public class CatalogController {
     @RequestMapping(value = "/{productId}", method = RequestMethod.GET)
     public String productsPage(@PathVariable Long productId, ModelMap model) throws IOException {
         model.addAttribute("product", productService.getById(productId));
-        model.addAttribute("pageCount", productService.getPageCount(productPerPage));
         return "product";
     }
 

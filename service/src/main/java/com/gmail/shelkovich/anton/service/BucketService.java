@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 
-@Service
+@Service("bucketService")
 public class BucketService extends AbstractService{
 
     @Autowired

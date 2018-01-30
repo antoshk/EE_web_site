@@ -13,11 +13,11 @@ public class Comment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "f_message", columnDefinition = "text")
+    @Column(name = "f_message", columnDefinition = "text", nullable = false)
     private String message;
 
     @ManyToOne
-    @JoinColumn(name = "f_user_id")
+    @JoinColumn(name = "f_user_id", nullable = false)
     private User user;
 
     public Long getId() {

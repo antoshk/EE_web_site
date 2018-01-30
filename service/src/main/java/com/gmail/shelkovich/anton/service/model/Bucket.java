@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-@Component
+@Component("bucket")
 @Scope(value="session", proxyMode= ScopedProxyMode.TARGET_CLASS)
 public class Bucket {
 

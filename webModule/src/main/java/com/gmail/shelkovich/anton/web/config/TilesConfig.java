@@ -5,9 +5,7 @@ import org.apache.tiles.Definition;
 import org.apache.tiles.definition.DefinitionsFactory;
 import org.apache.tiles.request.Request;
 
-import javax.servlet.ServletContext;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,6 +15,7 @@ public final class TilesConfig implements DefinitionsFactory {
     private static final Attribute BASE_TEMPLATE = new Attribute("/WEB-INF/views/layout/defaultLayout.jsp");
     private static final String viewsDir = "/WEB-INF/views/";
     private static final String ajaxViewsDir = "/WEB-INF/views/ajax/";
+    private static final String adminViewsDir = "/WEB-INF/views/admin/";
 
 
     @Override
@@ -47,10 +46,23 @@ public final class TilesConfig implements DefinitionsFactory {
         tilesDefinitions.put(name, new Definition(name, new Attribute(body), new HashMap<>()));
     }
 
+    private static void addAdminLayoutDef(String name, String body) {
+        Map<String, Attribute> attributes = new HashMap<>();
+
+        attributes.put("header", new Attribute("/WEB-INF/views/layout/header.jsp"));
+        attributes.put("menu", new Attribute("/WEB-INF/views/admin/layout/menu.jsp"));
+        attributes.put("body", new Attribute(body));
+        attributes.put("footer", new Attribute("/WEB-INF/views/layout/footer.jsp"));
+
+        Attribute ADMIN_TEMPLATE = new Attribute("/WEB-INF/views/admin/layout/defaultLayout.jsp");
+
+        tilesDefinitions.put(name, new Definition(name, ADMIN_TEMPLATE, attributes));
+    }
+
     /**
      * <code>Add Apache tiles definitions</code>
      */
-    public static void addDefinitions(String rootDir, boolean isAjax){
+    public static void addDefinitions(String rootDir, LayoutType type){
 
         File dir = new File(rootDir);
         File[] files= dir.listFiles();
@@ -59,10 +71,15 @@ public final class TilesConfig implements DefinitionsFactory {
                 if (file.isFile() && file.getName().contains(".jsp")) {
                     String filename = file.getName();
                     filename = filename.substring(0, filename.indexOf("."));
-                    if (isAjax){
-                        addAjaxDef(filename, ajaxViewsDir + filename + ".jsp");
-                    } else {
-                        addDefaultLayoutDef(filename, filename + " page", viewsDir + filename + ".jsp");
+                    switch (type){
+                        case STANDART:
+                            addDefaultLayoutDef(filename, filename + " page", viewsDir + filename + ".jsp");
+                            break;
+                        case AJAX:
+                            addAjaxDef(filename, ajaxViewsDir + filename + ".jsp");
+                            break;
+                        case ADMIN:
+                            addAdminLayoutDef(filename, adminViewsDir + filename + ".jsp");
                     }
                 }
             }

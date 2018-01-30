@@ -25,7 +25,7 @@ public abstract class GenericDaoImpl<T extends Serializable, ID extends Number> 
 
     @Override
     public T add(T bean) {
-        sessionFactory.getCurrentSession().merge(bean);
+        sessionFactory.getCurrentSession().persist(bean);
         return bean;
     }
 

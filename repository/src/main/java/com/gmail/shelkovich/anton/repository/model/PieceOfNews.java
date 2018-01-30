@@ -17,24 +17,25 @@ public class PieceOfNews implements Serializable {
     @Column(name = "f_id")
     private Long id;
 
-    @Column(name = "f_date", columnDefinition = "date")
+    @Column(name = "f_date", columnDefinition = "date", nullable = false)
     private Date publicationDate;
 
-    @Column(name = "f_title")
+    @Column(name = "f_title", nullable = false)
     private String newsTilte;
 
-    @Column(name = "f_body", columnDefinition = "text")
+    @Column(name = "f_body", columnDefinition = "text", nullable = false)
     private String newsBody;
 
-    @Column(name = "f_photo_uri")
+    @Column(name = "f_photo_uri", nullable = false)
     private String photoURI;
 
     @ManyToOne
-    @JoinColumn(name = "f_user_id")
+    @JoinColumn(name = "f_user_id", nullable = false)
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "f_news_id")
+    @JoinColumn(name = "f_news_id", nullable = false)
+    @OrderBy("f_id")
     private List<Comment> comments = new ArrayList<>();
 
     public Long getId() {

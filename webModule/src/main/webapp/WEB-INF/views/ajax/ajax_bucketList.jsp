@@ -12,7 +12,7 @@
     </thead>
     <tbody>
         <c:set var="iter" value="1"/>
-        <c:forEach var="entry" items="${bucket}">
+        <c:forEach var="entry" items="${bucketService.getAll()}">
             <tr>
                 <th scope="row">${iter}</th>
                 <td><a href="${pageContext.request.contextPath}/catalog/${entry.getKey().getId()}">${entry.getKey().getName()}</a></td>

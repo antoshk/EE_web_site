@@ -26,39 +26,20 @@ public class DaoList {
         return feedbackDao;
     }
 
-    public void setFeedbackDao(FeedbackDao feedbackDao) {
-        this.feedbackDao = feedbackDao;
-    }
-
     public UserDao getUserDao() {
         return userDao;
-    }
-
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
     }
 
     public ProductDao getProductDao() {
         return productDao;
     }
 
-    public void setProductDao(ProductDao productDao) {
-        this.productDao = productDao;
-    }
-
     public OrderDao getOrderDao() {
         return orderDao;
-    }
-
-    public void setOrderDao(OrderDao orderDao) {
-        this.orderDao = orderDao;
     }
 
     public NewsDao getNewsDao() {
         return newsDao;
     }
 
-    public void setNewsDao(NewsDao newsDao) {
-        this.newsDao = newsDao;
-    }
 }

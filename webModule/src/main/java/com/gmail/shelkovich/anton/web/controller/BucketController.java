@@ -30,27 +30,23 @@ public class BucketController {
             count = 1;
         }
         bucketService.addToBucket(productId, count);
-        model.addAttribute("currentBucketTotal", bucketService.getTotalCount());
         return "ajax_bucketCounter";
     }
 
     @RequestMapping(value="/ajax/list")
     public String bucketList(ModelMap model) throws IOException {
-        model.addAttribute("bucket", bucketService.getAll());
         return "ajax_bucketList";
     }
 
     @RequestMapping(value="/ajax/increase-product-count/{productId}")
     public String bucketListIncrease(@PathVariable Long productId, ModelMap model) throws IOException {
         bucketService.changeProductCount(productId,bucketService.getProductCount(productId)+1);
-        model.addAttribute("bucket", bucketService.getAll());
         return "ajax_bucketList";
     }
 
     @RequestMapping(value="/ajax/decrease-product-count/{productId}")
     public String bucketListDecrease(@PathVariable Long productId, ModelMap model) throws IOException {
         bucketService.changeProductCount(productId,bucketService.getProductCount(productId)-1);
-        model.addAttribute("bucket", bucketService.getAll());
         return "ajax_bucketList";
     }
 

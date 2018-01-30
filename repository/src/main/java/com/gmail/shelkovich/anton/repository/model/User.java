@@ -19,28 +19,28 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="f_full_name")
+    @Column(name="f_full_name", nullable = false)
     private String fullName;
 
-    @Column(name="f_email")
+    @Column(name="f_email", nullable = false)
     private String email;
 
-    @Column(name="f_phone")
+    @Column(name="f_phone", nullable = false)
     private String phone;
 
-    @Column(name="f_address")
+    @Column(name="f_address", nullable = false)
     private String address;
 
-    @Column(name="f_password")
+    @Column(name="f_password", nullable = false)
     private String password;
 
-    @Column(name="f_is_active")
+    @Column(name="f_is_active", nullable = false)
     private Boolean isActive;
 
-    @Column(name="f_additional_info")
+    @Column(name="f_additional_info", nullable = false)
     private String additionalInfo;
 
-    @Column(name="f_role", columnDefinition = "enum")
+    @Column(name="f_role", columnDefinition = "enum", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 

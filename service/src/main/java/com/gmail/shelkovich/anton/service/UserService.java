@@ -9,13 +9,16 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserService extends AbstractService {
 
     @Autowired
     private AppUserDetailsService userDetailsService;
 
-    @Transactional
+    @Transactional(readOnly = true)
     public UserDTO getByEmail(String email){
         User user = daoList.getUserDao().getByEmail(email);
         if (user != null){
@@ -53,6 +56,16 @@ public class UserService extends AbstractService {
     public void addNewUser(UserDTO user){
         daoList.getUserDao().add(UserConverter.fromDTO(user, false));
     }
+
+    public List<UserDTO> getAll(){
+        List<User> users = daoList.getUserDao().getAll();
+        List<UserDTO> userDTOs = new ArrayList<>();
+        for(User user: users){
+            userDTOs.add(UserConverter.toDTO(user,false));
+        }
+        return userDTOs;
+    }
+
 
 //    public void autoLogin(String username, String password) {
 //        UserDetails user = this.userDetailsService.loadUserByUsername(username);

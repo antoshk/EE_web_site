@@ -40,6 +40,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public TilesViewResolver getTilesViewResolver() {
         TilesViewResolver tilesViewResolver = new TilesViewResolver();
         tilesViewResolver.setViewClass(TilesView.class);
+        tilesViewResolver.setExposeContextBeansAsAttributes(true);
+        tilesViewResolver.setExposedContextBeanNames("bucketService");
         return tilesViewResolver;
     }
 
@@ -53,8 +55,9 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         tilesConfigurer.setDefinitionsFactoryClass(TilesConfig.class);
 
         // Add apache tiles definitions
-        TilesConfig.addDefinitions(servletContext.getRealPath("/WEB-INF/views/"), false);
-        TilesConfig.addDefinitions(servletContext.getRealPath("/WEB-INF/views/ajax/"), true);
+        TilesConfig.addDefinitions(servletContext.getRealPath("/WEB-INF/views/"), LayoutType.STANDART);
+        TilesConfig.addDefinitions(servletContext.getRealPath("/WEB-INF/views/ajax/"), LayoutType.AJAX);
+        TilesConfig.addDefinitions(servletContext.getRealPath("/WEB-INF/views/admin/"), LayoutType.ADMIN);
 
         return tilesConfigurer;
     }

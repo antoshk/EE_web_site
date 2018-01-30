@@ -26,20 +26,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/user/**", "/order", "/order/**").access("hasRole('USER') or hasRole('ADMIN') or hasRole('SUPERADMIN')")
-                .antMatchers("/admin/**").access("hasRole('ADMIN') or hasRole('SUPERADMIN')")
+                .antMatchers("/admin/**", "/news/*/comments/*/**").access("hasRole('ADMIN') or hasRole('SUPERADMIN')")
+                .antMatchers("/user/*/**").access("hasRole('SUPERADMIN')")
+                .antMatchers("/user/*/**").access("hasRole('USER')")
                 .antMatchers("/login", "/reg").anonymous()
                 .antMatchers("/**").permitAll()
                 .and()
                 .formLogin()
-                .loginPage("/login")
+                    .loginPage("/login")
                     .usernameParameter("email")
-                    .successHandler((req, resp, auth) -> {
-                        resp.sendRedirect(req.getContextPath()+"/user/profile");
-                    })
+//                    .successHandler((req, resp, auth) -> {
+//                        resp.sendRedirect(req.getSession().getAttribute("referURL").toString());
+//                    })
+                    .successHandler(new CustomSuccessHandler())
                     .failureUrl("/login?error=true")
                 .and()
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/")
                 .and().csrf().disable();
+
+
     }
 
     @Bean

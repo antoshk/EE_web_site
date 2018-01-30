@@ -55,14 +55,9 @@ public class ProductService extends AbstractService {
     }
 
     @Transactional(readOnly = true)
-    public int getPageCount(int perPage){
-        int total = daoList.getProductDao().getRowCount();
-        return calculatePageCount(total, perPage);
-    }
-
-    @Transactional(readOnly = true)
     public Pagination getPagination(int itemsPerPage, Integer currentPage){
-        return getAbstractPagination(pagination, currentPage, getPageCount(itemsPerPage));
+        int total = daoList.getProductDao().getRowCount();
+        return getAbstractPagination(pagination, currentPage, total, itemsPerPage);
     }
 
 }
