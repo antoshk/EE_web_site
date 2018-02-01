@@ -27,13 +27,13 @@
             <ul class="nav navbar-nav navbar-right">
                 <security:authorize access="hasRole('USER')">
                     <li><a href="${pageContext.request.contextPath}/orders">Заказы</a></li>
+                    <li><a href="${pageContext.request.contextPath}/profile">Личный кабинет</a></li>
                 </security:authorize>
                 <security:authorize access="isAnonymous()">
                     <li><a href="${pageContext.request.contextPath}/login?from=${currentURI}">Войти</a></li>
                     <li><a href="${pageContext.request.contextPath}/reg">Регистрация</a></li>
                 </security:authorize>
                 <security:authorize access="isAuthenticated()">
-                        <li><a href="${pageContext.request.contextPath}/profile">Личный кабинет</a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Выйти</a></li>
                 </security:authorize>
                 <security:authorize access="hasRole('USER')">

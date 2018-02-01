@@ -13,7 +13,7 @@ $(document).ready(function() {
 <div class="row">
     <div class="col-sm-4">
         <div class="thumbnail">
-            <img alt="EE-shop product image" src="${pageContext.request.contextPath}/resources/images/products/${product.getImageURI()}" class="img-rounded"/>
+            <img alt="EE-shop product image" src="${pageContext.request.contextPath}/download/products/${product.getImageURI()}" class="img-rounded"/>
             <div class="caption">
                 <h3>
                     ${product.getName()}

@@ -6,6 +6,7 @@
             <th>Id</th>
             <th>Email</th>
             <th>ФИО</th>
+            <th>Роль</th>
             <th>Состояние</th>
             <th>Действия</th>
         </tr>
@@ -16,6 +17,7 @@
                 <th scope="row">${user.getId()}</th>
                 <td>${user.getEmail()}</td>
                 <td>${user.getFullName()}</td>
+                <td>${user.getRole().toString()}</td>
                 <td>
                     <c:if test="${user.getActive()}">Активен</c:if>
                     <c:if test="${!user.getActive()}">Заблокирован</c:if>

@@ -35,7 +35,7 @@
     <div class="card p-3 col-md-12">
         <div class="card-wrapper">
             <div class="card-img">
-                <img alt="News Image" src="${pageContext.request.contextPath}/resources/images/news/${pieceOfNews.getPhotoURI()}" class="img-thumbnail" />
+                <img alt="News Image" src="${pageContext.request.contextPath}/download/news/${pieceOfNews.getPhotoURI()}" class="img-thumbnail" />
             </div>
             <div class="card-box">
                 <h4 class="card-title pb-3 mbr-fonts-style display-7">

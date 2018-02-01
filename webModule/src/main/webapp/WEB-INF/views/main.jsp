@@ -27,7 +27,7 @@ $(document).ready(function() {
                         <div class="card p-3 col-12 col-md-6 col-lg-4">
                             <div class="card-wrapper">
                                 <div class="card-img">
-                                    <img alt="News Image" src="${pageContext.request.contextPath}/resources/images/news/${pieceOfNews.getPhotoURI()}" class="img-thumbnail" />
+                                    <img alt="News Image" src="${pageContext.request.contextPath}/download/news/${pieceOfNews.getPhotoURI()}" class="img-thumbnail" />
                                 </div>
                                 <div class="card-box">
                                     <h4 class="card-title pb-3 mbr-fonts-style display-7">
@@ -66,7 +66,7 @@ $(document).ready(function() {
                     <c:forEach var="product" items="${products}">
                         <div class="col-sm-4">
                             <div class="thumbnail">
-                                <img alt="EE-shop product image" src="${pageContext.request.contextPath}/resources/images/products/${product.getImageURI()}" class="img-rounded"/>
+                                <img alt="EE-shop product image" src="${pageContext.request.contextPath}/download/products/${product.getImageURI()}" class="img-rounded"/>
                                 <div class="caption">
                                     <h3>
                                         ${product.getName()}
