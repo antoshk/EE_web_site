@@ -5,6 +5,7 @@ import com.gmail.shelkovich.anton.service.UserService;
 import com.gmail.shelkovich.anton.service.model.dto.UserDTO;
 import com.gmail.shelkovich.anton.web.controller.validator.UserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -25,6 +26,9 @@ public class RegistrationController {
 
     @Autowired
     private UserValidator userValidator;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     UserService userService;
@@ -49,6 +53,7 @@ public class RegistrationController {
         }
         user.setRole(Role.ROLE_USER);
         user.setActive(true);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.addNewUser(user);
         return "redirect:/login";
     }

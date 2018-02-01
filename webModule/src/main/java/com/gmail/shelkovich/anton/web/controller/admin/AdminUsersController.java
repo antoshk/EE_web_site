@@ -5,13 +5,11 @@ import com.gmail.shelkovich.anton.service.model.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.validation.Valid;
 import java.io.IOException;
 
 @Controller
@@ -35,15 +33,15 @@ public class AdminUsersController {
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public String getSingleUser(@PathVariable Long userId, ModelMap model) throws IOException {
-        model.addAttribute("user", userService.getById(userId));
+        UserDTO user = userService.getById(userId);
+        user.setPassword("");
+        model.addAttribute("user", user);
         return "editSingleUser";
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.POST)
-    public String updateUser(@PathVariable Long userId, @Valid @ModelAttribute("user") UserDTO user, BindingResult result, ModelMap model) throws IOException {
-        if(result.hasErrors()){
-            return "editSingleUser";
-        }
+    public String updateUser(@PathVariable Long userId, @ModelAttribute("user") UserDTO user) throws IOException {
+
         userService.updateUser(user);
         return "redirect:/admin/users";
     }

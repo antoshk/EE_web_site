@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -31,7 +32,10 @@ public class ProfileController {
     private UserValidator userValidator;
 
     @Autowired
-    UserService userService;
+    private UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
@@ -90,7 +94,7 @@ public class ProfileController {
             }
         }
         UserDTO currentUser = userService.getCurrentUser();
-        currentUser.setPassword(user.getPassword());
+        currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
         userService.updateUser(currentUser);
         return "redirect:/profile";
     }
