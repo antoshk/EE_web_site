@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,10 +24,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/user/**", "/order", "/order/**").access("hasRole('USER') or hasRole('ADMIN') or hasRole('SUPERADMIN')")
+                .antMatchers("/admin/users", "/admin/users/**").access("hasRole('SUPERADMIN')")
                 .antMatchers("/admin/**", "/news/*/comments/*/**").access("hasRole('ADMIN') or hasRole('SUPERADMIN')")
-                .antMatchers("/user/*/**").access("hasRole('SUPERADMIN')")
-                .antMatchers("/user/*/**").access("hasRole('USER')")
+                .antMatchers("/bucket/**", "/bucket", "/orders/**", "/orders", "/profile").access("hasRole('USER')")
                 .antMatchers("/login", "/reg").anonymous()
                 .antMatchers("/**").permitAll()
                 .and()
@@ -44,13 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/")
                 .and().csrf().disable();
 
-
     }
 
-    @Bean
-    GrantedAuthorityDefaults grantedAuthorityDefaults() {
-        return new GrantedAuthorityDefaults(""); // Remove the ROLE_ prefix
-    }
 
     @Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {

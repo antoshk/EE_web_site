@@ -11,15 +11,8 @@ import java.io.IOException;
 @RequestMapping(value = "/admin")
 public class AdminController {
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String adminMainPage(ModelMap model) throws IOException {
-        return "profile";
-    }
-
-
-
-    @RequestMapping(value = {"/users"}, method = RequestMethod.GET)
-    public String productsFirstPage(ModelMap model) throws IOException {
-        return "profile";
+    @RequestMapping(value = {"/", ""}, method = RequestMethod.GET)
+    public String getUsers(ModelMap model) throws IOException {
+        return "redirect:/admin/orders";
     }
 }

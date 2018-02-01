@@ -43,7 +43,7 @@
                         <div class="col-md-10">
                         </div>
                         <div class="col-md-2">
-                             <a href="${pageContext.request.contextPath}/order/confirm" class="btn btn-primary" type="button">Оформить заказ</a>
+                             <a href="${pageContext.request.contextPath}/orders/confirm" class="btn btn-primary" type="button">Оформить заказ</a>
                         </div>
                     </div>
                 </div>

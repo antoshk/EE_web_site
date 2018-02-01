@@ -1,8 +1,10 @@
 package com.gmail.shelkovich.anton.service;
 
 import com.gmail.shelkovich.anton.repository.model.Product;
+import com.gmail.shelkovich.anton.service.converter.OrderConverter;
 import com.gmail.shelkovich.anton.service.converter.ProductConverter;
 import com.gmail.shelkovich.anton.service.model.Bucket;
+import com.gmail.shelkovich.anton.service.model.dto.OrderDTO;
 import com.gmail.shelkovich.anton.service.model.dto.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,5 +63,13 @@ public class BucketService extends AbstractService{
 
     public void cleanBucket(){
         bucket.clean();
+    }
+
+    @Transactional(readOnly = true)
+    public void loadOrderToBucket(Long orderId){
+        OrderDTO order = OrderConverter.toDTO(daoList.getOrderDao().getById(orderId),null);
+        for (Map.Entry<ProductDTO, Integer> entry : order.getProducts().entrySet()) {
+            bucket.addProduct(entry.getKey(), entry.getValue());
+        }
     }
 }

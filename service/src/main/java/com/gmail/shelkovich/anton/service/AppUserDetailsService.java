@@ -1,5 +1,6 @@
 package com.gmail.shelkovich.anton.service;
 
+import com.gmail.shelkovich.anton.service.converter.exception.UserIsNotAllowed;
 import com.gmail.shelkovich.anton.service.model.AppUserDetails;
 import com.gmail.shelkovich.anton.service.model.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,10 @@ public class AppUserDetailsService implements UserDetailsService {
         UserDTO user = userService.getByEmail(email);
         if(user == null){
             throw new UsernameNotFoundException(email);
+        }
+
+        if(!user.getActive()){
+            throw new UserIsNotAllowed("User "+user.getId()+" is blocked");
         }
         return new AppUserDetails(user);
     }

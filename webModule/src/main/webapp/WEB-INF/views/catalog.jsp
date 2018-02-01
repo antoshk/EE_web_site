@@ -33,7 +33,10 @@ $(document).ready(function() {
                                     Цена: ${product.getPrice()}
                                 </p>
                                 <p>
-                                    <button class="btn btn-primary addToBucket" productId="${product.getId()}">В корзину</button><a class="btn" href="${pageContext.request.contextPath}/catalog/${product.getId()}">Подробнее</a>
+                                    <security:authorize access="hasRole('USER')">
+                                        <button class="btn btn-primary addToBucket" productId="${product.getId()}">В корзину</button>
+                                    </security:authorize>
+                                    <a class="btn" href="${pageContext.request.contextPath}/catalog/${product.getId()}">Подробнее</a>
                                 </p>
                             </div>
                         </div>

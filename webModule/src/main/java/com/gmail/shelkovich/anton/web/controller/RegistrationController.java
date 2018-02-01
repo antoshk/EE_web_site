@@ -43,17 +43,14 @@ public class RegistrationController {
     }
 
     @RequestMapping( method = RequestMethod.POST)
-    public String regRequest(@Valid @ModelAttribute("newUser") UserDTO user, BindingResult result, ModelMap model, HttpServletResponse resp, HttpServletRequest req) throws IOException {
-        System.out.println(user.getFullName());
-        req.setCharacterEncoding("UTF-8");
-        resp.setCharacterEncoding("UTF-8");
+    public String regRequest(@Valid @ModelAttribute("newUser") UserDTO user, BindingResult result, ModelMap model) throws IOException {
         if(result.hasErrors()){
             return "register";
         }
-        user.setRole(Role.USER);
+        user.setRole(Role.ROLE_USER);
         user.setActive(true);
         userService.addNewUser(user);
-        return "profile";
+        return "redirect:/login";
     }
 
 }

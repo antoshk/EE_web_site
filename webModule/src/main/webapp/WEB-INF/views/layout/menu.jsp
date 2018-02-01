@@ -16,10 +16,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <security:authorize access="isAuthenticated()">
-                    <security:authorize access="hasRole('ADMIN') or hasRole('SUPERADMIN')">
-                        <li><a href="${pageContext.request.contextPath}/admin/">Администрировать</a></li>
-                    </security:authorize>
+                <security:authorize access="hasRole('SUPERADMIN') or hasRole('ADMIN')">
+                    <li><a href="${pageContext.request.contextPath}/admin/">Администрировать</a></li>
                 </security:authorize>
                 <li><a href="${pageContext.request.contextPath}/news">Новости</a></li>
                 <li><a href="${pageContext.request.contextPath}/catalog">Каталог</a></li>
@@ -27,7 +25,9 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-
+                <security:authorize access="hasRole('USER')">
+                    <li><a href="${pageContext.request.contextPath}/orders">Заказы</a></li>
+                </security:authorize>
                 <security:authorize access="isAnonymous()">
                     <li><a href="${pageContext.request.contextPath}/login?from=${currentURI}">Войти</a></li>
                     <li><a href="${pageContext.request.contextPath}/reg">Регистрация</a></li>
@@ -36,8 +36,9 @@
                         <li><a href="${pageContext.request.contextPath}/profile">Личный кабинет</a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Выйти</a></li>
                 </security:authorize>
-
-                <li id="bucket_counter"><a href="${pageContext.request.contextPath}/bucket">Корзина <span class="badge">${bucketService.getTotalCount()}</span></a></li>
+                <security:authorize access="hasRole('USER')">
+                    <li id="bucket_counter"><a href="${pageContext.request.contextPath}/bucket">Корзина <span class="badge">${bucketService.getTotalCount()}</span></a></li>
+                </security:authorize>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->

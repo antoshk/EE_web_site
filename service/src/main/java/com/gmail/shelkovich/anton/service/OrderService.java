@@ -1,7 +1,9 @@
 package com.gmail.shelkovich.anton.service;
 
+import com.gmail.shelkovich.anton.repository.model.Order;
 import com.gmail.shelkovich.anton.repository.model.OrderStatus;
 import com.gmail.shelkovich.anton.service.converter.OrderConverter;
+import com.gmail.shelkovich.anton.service.converter.UserConverter;
 import com.gmail.shelkovich.anton.service.model.dto.OrderDTO;
 import com.gmail.shelkovich.anton.service.model.dto.ProductDTO;
 import com.gmail.shelkovich.anton.service.model.dto.UserDTO;
@@ -10,13 +12,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 @Service
 public class OrderService extends AbstractService {
 
     @Autowired
-    BucketService bucketService;
+    private BucketService bucketService;
+
+    @Autowired
+    private UserService userService;
 
 
     public OrderDTO generateOrder(UserDTO user) {
@@ -49,6 +55,40 @@ public class OrderService extends AbstractService {
             totalPrice = totalPrice.add(product.getKey().getPrice().multiply(new BigDecimal(product.getValue())));
         }
         return totalPrice;
+    }
+
+    @Transactional
+    public void updateOrderStatus(Long id, OrderStatus status){
+        daoList.getOrderDao().getById(id).setStatus(status);
+    }
+
+    @Transactional(readOnly = true)
+    public List<OrderDTO> getCurrentUserOrders(){
+        Long id = userService.getCurrentUser().getId();
+        UserDTO user = UserConverter.toDTO(daoList.getUserDao().getById(id), true);
+        return user.getOrders();
+    }
+
+    @Transactional(readOnly = true)
+    public List<OrderDTO> getAll(){
+        return OrderConverter.toDTO(daoList.getOrderDao().getAll());
+    }
+
+    @Transactional(readOnly = true)
+    public boolean isCurrentUserOrderOwner(Long orderId){
+        for(OrderDTO order: getCurrentUserOrders()){
+            if(order.getId().equals(orderId)) return true;
+        }
+        return false;
+    }
+
+    @Transactional
+    public void deleteOrder(Long orderId){
+        Order order = daoList.getOrderDao().getById(orderId);
+        if(order.getStatus().equals(OrderStatus.NEW)){
+            daoList.getOrderDao().delete(orderId);
+        }
+
     }
 
 }

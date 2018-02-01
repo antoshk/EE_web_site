@@ -30,7 +30,7 @@ public class OrderDaoImplTest {
         user.setFullName("asdfasdf");
         user.setPassword("asdf");
         user.setPhone("1234");
-        user.setRole(Role.USER);
+        user.setRole(Role.ROLE_USER);
 
         Product product = new Product();
         product.setImageURI("asdf");

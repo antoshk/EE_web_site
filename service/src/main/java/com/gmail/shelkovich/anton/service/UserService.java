@@ -18,11 +18,22 @@ public class UserService extends AbstractService {
     @Autowired
     private AppUserDetailsService userDetailsService;
 
+
+    @Transactional(readOnly = true)
+    public UserDTO getById(Long id){
+        User user = daoList.getUserDao().getById(id);
+        if (user != null){
+            return UserConverter.toDTO(user, false);
+        } else {
+            return null;
+        }
+    }
+
     @Transactional(readOnly = true)
     public UserDTO getByEmail(String email){
         User user = daoList.getUserDao().getByEmail(email);
         if (user != null){
-            return UserConverter.toDTO(daoList.getUserDao().getByEmail(email), false);
+            return UserConverter.toDTO(user, false);
         } else {
             return null;
         }
@@ -57,6 +68,32 @@ public class UserService extends AbstractService {
         daoList.getUserDao().add(UserConverter.fromDTO(user, false));
     }
 
+    @Transactional
+    public UserDTO updateUser(UserDTO userDTO){
+        User user = UserConverter.fromDTO(userDTO,false);
+        user.setOrders(daoList.getUserDao().getById(user.getId()).getOrders());
+        User updatedUser = daoList.getUserDao().update(user);
+        return UserConverter.toDTO(updatedUser,false);
+    }
+
+    @Transactional
+    public void deleteUser(Long id){
+        daoList.getUserDao().delete(id);
+    }
+
+    @Transactional
+    public void blockUser(Long id){
+        User user = daoList.getUserDao().getById(id);
+        user.setActive(false);
+    }
+
+    @Transactional
+    public void unblockUser(Long id){
+        User user = daoList.getUserDao().getById(id);
+        user.setActive(true);
+    }
+
+    @Transactional(readOnly = true)
     public List<UserDTO> getAll(){
         List<User> users = daoList.getUserDao().getAll();
         List<UserDTO> userDTOs = new ArrayList<>();
@@ -65,6 +102,8 @@ public class UserService extends AbstractService {
         }
         return userDTOs;
     }
+
+
 
 
 //    public void autoLogin(String username, String password) {

@@ -25,7 +25,9 @@ $(document).ready(function() {
                     Цена: ${product.getPrice()}
                 </p>
                 <p>
-                    <button class="btn btn-primary addToBucket" productId="${product.getId()}">В корзину</button>
+                    <security:authorize access="hasRole('USER')">
+                        <button class="btn btn-primary addToBucket" productId="${product.getId()}">В корзину</button>
+                    </security:authorize>
                 </p>
             </div>
         </div>

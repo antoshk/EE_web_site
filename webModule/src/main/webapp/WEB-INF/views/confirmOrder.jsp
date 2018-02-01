@@ -48,7 +48,7 @@
                         <div class="col-md-10">
                         </div>
                         <div class="col-md-2">
-                            <form action="${pageContext.request.contextPath}/order" method="POST"><button type="submit" class="btn btn-primary">Подтвердить заказ</button></form>
+                            <form action="${pageContext.request.contextPath}/orders" method="POST"><button type="submit" class="btn btn-primary">Подтвердить заказ</button></form>
                         </div>
                     </div>
                 </div>

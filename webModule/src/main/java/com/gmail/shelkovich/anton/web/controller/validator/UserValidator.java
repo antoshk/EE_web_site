@@ -22,7 +22,8 @@ public class UserValidator implements Validator {
     public void validate(Object obj, Errors err) {
 //        ValidationUtils.rejectIfEmpty(err, "fullName", "reg.user.fullName.empty");
         UserDTO user = (UserDTO) obj;
-        if(!user.getPassword().equals(user.getConfirmPassword())){
+
+        if(user.getPassword() != null && !user.getPassword().equals(user.getConfirmPassword())){
             err.rejectValue("confirmPassword", "reg.user.passwordsNotMatch");
         }
 
