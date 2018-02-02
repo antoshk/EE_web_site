@@ -22,7 +22,7 @@ mvn clean install
 
 ````
 
-For build with data base initialization use:
+For build with database initialization use:
 ````
 
 mvn clean install -Pinit_database
