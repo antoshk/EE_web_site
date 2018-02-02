@@ -24,7 +24,7 @@ public class HibernateConfig {
     public DataSource getDataSource() {
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(env.getProperty("db.driver"));
-        dataSource.setUrl(env.getProperty("db.url"));
+        dataSource.setUrl(env.getProperty("db.url")+env.getProperty("db.name_and_params"));
         dataSource.setUsername(env.getProperty("db.username"));
         dataSource.setPassword(env.getProperty("db.password"));
         dataSource.setInitialSize(Integer.parseInt(env.getProperty("dbcp.init_pool_size")));
