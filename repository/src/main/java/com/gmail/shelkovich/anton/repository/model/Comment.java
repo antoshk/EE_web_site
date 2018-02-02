@@ -13,7 +13,7 @@ public class Comment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "f_message", columnDefinition = "text", nullable = false)
+    @Column(name = "f_message", columnDefinition = "text(2000)", nullable = false)
     private String message;
 
     @ManyToOne

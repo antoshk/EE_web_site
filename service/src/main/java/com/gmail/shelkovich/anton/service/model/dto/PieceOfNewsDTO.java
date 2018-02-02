@@ -1,5 +1,8 @@
 package com.gmail.shelkovich.anton.service.model.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -9,21 +12,23 @@ import java.util.List;
 public class PieceOfNewsDTO {
 
     private Long id;
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private Date publicationDate;
-    private String newsTilte;
+    private String newsTitle;
     private String newsBody;
     private String photoURI;
     private UserDTO user;
     private Integer commentCount;
     private List<CommentDTO> comments = new ArrayList<>();
-
-    public Long getId() {
-        return id;
-    }
+    private MultipartFile image;
 
     public String getStringPublicationDate(){
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         return df.format(publicationDate);
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
@@ -38,12 +43,12 @@ public class PieceOfNewsDTO {
         this.publicationDate = publicationDate;
     }
 
-    public String getNewsTilte() {
-        return newsTilte;
+    public String getNewsTitle() {
+        return newsTitle;
     }
 
-    public void setNewsTilte(String newsTilte) {
-        this.newsTilte = newsTilte;
+    public void setNewsTitle(String newsTitle) {
+        this.newsTitle = newsTitle;
     }
 
     public String getNewsBody() {
@@ -84,5 +89,13 @@ public class PieceOfNewsDTO {
 
     public void setComments(List<CommentDTO> comments) {
         this.comments = comments;
+    }
+
+    public MultipartFile getImage() {
+        return image;
+    }
+
+    public void setImage(MultipartFile image) {
+        this.image = image;
     }
 }

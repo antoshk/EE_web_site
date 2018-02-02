@@ -16,7 +16,7 @@ public class Feedback implements Serializable {
     @Column(name = "f_email")
     private String email;
 
-    @Column(name = "f_message", columnDefinition = "text")
+    @Column(name = "f_message", columnDefinition = "text(2000)")
     private String message;
 
     public Long getId() {

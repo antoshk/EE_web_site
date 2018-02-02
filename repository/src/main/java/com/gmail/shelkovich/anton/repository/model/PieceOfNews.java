@@ -21,9 +21,9 @@ public class PieceOfNews implements Serializable {
     private Date publicationDate;
 
     @Column(name = "f_title", nullable = false)
-    private String newsTilte;
+    private String newsTitle;
 
-    @Column(name = "f_body", columnDefinition = "text", nullable = false)
+    @Column(name = "f_body", columnDefinition = "text(2000)", nullable = false)
     private String newsBody;
 
     @Column(name = "f_photo_uri", nullable = false)
@@ -54,12 +54,12 @@ public class PieceOfNews implements Serializable {
         this.publicationDate = publicationDate;
     }
 
-    public String getNewsTilte() {
-        return newsTilte;
+    public String getNewsTitle() {
+        return newsTitle;
     }
 
-    public void setNewsTilte(String newsTilte) {
-        this.newsTilte = newsTilte;
+    public void setNewsTitle(String newsTitle) {
+        this.newsTitle = newsTitle;
     }
 
     public String getNewsBody() {

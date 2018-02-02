@@ -23,6 +23,9 @@ public class NewsService extends AbstractService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private FileService fileService;
+
     @Transactional(readOnly = true)
     public List<PieceOfNewsDTO> getMainPageNews(){
         return getShortenNewsByPage(3, 1);
@@ -60,6 +63,12 @@ public class NewsService extends AbstractService {
         return pieceOfNewsDTO;
     }
 
+    @Transactional(readOnly = true)
+    public List<PieceOfNewsDTO> getAll(){
+        List<PieceOfNews> news = daoList.getNewsDao().getAll();
+        return NewsConverter.toDTO(news, false);
+    }
+
     @Transactional
     public void addNewComment(String message, Long newsId){
         PieceOfNews pieceOfNews = daoList.getNewsDao().getById(newsId);
@@ -68,5 +77,33 @@ public class NewsService extends AbstractService {
         comment.setUser(UserConverter.fromDTO(userService.getCurrentUser(),false));
         comment.setMessage(message);
         comments.add(comment);
+    }
+
+    @Transactional
+    public void updateNews(PieceOfNewsDTO pieceOfNews){
+        PieceOfNewsDTO old = getById(pieceOfNews.getId());
+        pieceOfNews.setComments(old.getComments());
+        pieceOfNews.setUser(old.getUser());
+        if(pieceOfNews.getPhotoURI() == null){
+            pieceOfNews.setPhotoURI(old.getPhotoURI());
+        }
+        daoList.getNewsDao().update(NewsConverter.fromDTO(pieceOfNews,true));
+    }
+
+    @Transactional
+    public void addNew(PieceOfNewsDTO pieceOfNews){
+        pieceOfNews.setUser(userService.getCurrentUser());
+        daoList.getNewsDao().add(NewsConverter.fromDTO(pieceOfNews,false));
+    }
+
+    @Transactional
+    public void delete(Long id){
+        daoList.getNewsDao().delete(id);
+        fileService.deleteFileByNewsId(id);
+    }
+
+    @Transactional
+    public void deleteComment(Long id){
+        daoList.getCommentDao().delete(id);
     }
 }

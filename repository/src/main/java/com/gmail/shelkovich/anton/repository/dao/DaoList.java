@@ -22,6 +22,9 @@ public class DaoList {
     @Autowired
     private NewsDao newsDao;
 
+    @Autowired
+    private CommentDao commentDao;
+
     public FeedbackDao getFeedbackDao() {
         return feedbackDao;
     }
@@ -42,4 +45,7 @@ public class DaoList {
         return newsDao;
     }
 
+    public CommentDao getCommentDao() {
+        return commentDao;
+    }
 }
