@@ -1,65 +1,44 @@
-# JD2017-09-20.
+# Course project
 
-### Начало работы:
+### Overview
+Web application with functionality of e-shop. Created while studying at <a href="https://www.it-academy.by/">Education Center of High Technologies Park</a> on <a href="https://www.it-academy.by/course/java-developer/jd2-tekhnologii-razrabotki-enterprise-resheniy-na-java/">"Technologies for developing enterprise solutions on JAVA"</a> course.
 
-<b>Посмотрите видео: <a href="https://youtu.be/mIs-X63CH78" target="_blank">Tutorial:QuickStart</a></b>
+Application was made mostly using Hibernate, Spring MVC and Spring Security. Additionally it uses Apache Tiles, fields validation, AJAX queries and even some localization  
 
-1. Инициализация. Нажмите Fork на странице https://github.com/Khmelov/JD2017-09-20/
-2. У вас в аккаунте fork появится тут  https://github.com/ваш_логин/JD2017-09-20
-3. Выберите в IDEA VCS -> Checkout version control -> GitHub и затем:
- * укажите ссылку на Ваш fork https://github.com/ваш_логин/JD2017-09-20;
- * выберите путь к папке проекта;
- * укажите имя папки проекта (например JD2017-09-20_verXX - такой папки на диске быть не должно).
+### Setup
+* Check application properties at app.properties and set appropriate path to file storage
+* Optionally, to see images you may unpack images.rar to file storage destination
+* Check data base properties at database.properties. By default it uses "root" for username and empty password, but it can be changed.
 
-### Перезапуск проекта (требуется не всегда, только при сбоях):
-Многие настройки проекта хранятся в файле JD2017-09-20.iml и папке .idea.
-Эти настройки могут быть разными на разных машинах.
 
-Чтобы запустить проект с нуля в Windows Вам нужно распаковать Init.zip
+### How to build
+Maven tool is used for building
 
-1. Если все нормально вы увидите iml-файл в корне проекта
-2. При необходимости настройте SDK и среду (File-Project Structure)
 
-Теперь осталось лишь открыть и закрыть проект. Шаги:
+For regular build run follow command:
+````
 
-1. File-Close
-2. Откроется меню с последними проектами, выберите самый первый в списке.
-3. Настройте параметры проекта (SDK, JUnit и т.д.)
+mvn clean install
 
-Проделав шаги по запуску проекта вы всегда можете СБРОСИТЬ все настройки проекта.
-Папки с исходными файлами при этом не пострадают.
+````
 
-### Перед **каждым** сеансом работы:
+For build with data base initialization use:
+````
 
-1. Получите последние изменения основного репозитория VCS -> Git -> Rebase my GitHub fork
-2. Отправьте эти изменения в свой репозиторий VCS -> Git -> Push
+mvn clean install -Pinit_database
 
-### Работаем с кодом:
+````
 
-1. Работайте ...
-2. Добейтесь чтобы проект собирался и запускался без ошибок (В РЕЖИМЕ JAVA 7 - ЭТО ВАЖНО !!!).
-3. Делайте коммиты Ctrl+K.
- * _возврат на пункт 1  n раз ;)_
-5. Отправьте накопленные изменения в свой репозиторий VCS -> Git -> Push
-6. Если работа завершена, а проект собирается и запускается, то можно сделать VCS -> Git -> Pull Request
-<br>_при Pull Request-е видно какие изменяются файлы. В идеале должны быть изменения только в вашей папке_
+### How to run
+Deploy built EEShop.war to Tomcat server and open http://localhost:8080/ee-shop/ in browser
 
-### ВНИМАНИЕ!
+### How to use
+There are three users with password "123456":
+* super@super.com - with super admin role that can manage everything
+* admin@admin.com - with admin role that can manage everything excluding users
+* user@user.com - user, who can behave like a user: look for products, place orders, write comments and so on.
 
-Если проект не запускается из-за ошибок в чужих папках **НЕ ИСПРАВЛЯЙТЕ ИХ!**.
-<br>Кто-то их тоже исправит и будет конфликт слияния на github.
-<br>А как тогда сделать правильно? Просто отключите проблемную папку:
-* выделите её в дереве проекта
-* нажмите на ней правой кнопкой мыши
-* Выполните команду Mark Directory as -> Excluded
-* эта команда затронет только Ваш компьютер
+Just log in and try everything by yourself!
 
-### Если все поломалось!
-
-1. **Скопируйте** свою папку из src/by/it/ в отдельное место на диске.
- * найти свою папку на диске можно выделив ее в дереве папок в IDEA. Далее, правая кнопка -> Show in Explorer.
-2. Удалите fork из своего аккаунта github (откройте форк на сайте, выберите Setting-Delete this repository)
-3. Выполните всю последовательность из шапки (см. <b>Начало работы</b> и <b>Запуск проекта</b>).
-4. Верните свою папку на место в свежем проекте.
-
-_С уважением, Александр Хмелев._
+### Author
+Anton Shelkovich (anton.shelkovich@gmail.com)
