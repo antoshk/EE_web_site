@@ -6,6 +6,7 @@ import com.gmail.shelkovich.anton.service.converter.ProductConverter;
 import com.gmail.shelkovich.anton.service.model.Pagination;
 import com.gmail.shelkovich.anton.service.model.dto.ProductDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +18,12 @@ public class ProductService extends AbstractService {
 
     @Autowired
     private Pagination pagination;
+
+    @Value("${service.product.shortenDescription.length:140}")
+    private Integer shortenDescriptionLength;
+
+    @Autowired
+    private FileService fileService;
 
     @Transactional(readOnly = true)
     public List<ProductDTO> getMainPageProducts(){
@@ -38,8 +45,8 @@ public class ProductService extends AbstractService {
         for(Product product: products){
             ProductDTO productDTO = ProductConverter.toDTO(product);
             String description = productDTO.getDescription();
-            if (description.length() > 140) {
-                description = description.substring(0, 140) + "...";
+            if (description.length() > shortenDescriptionLength) {
+                description = description.substring(0, shortenDescriptionLength) + "...";
                 productDTO.setDescription(description);
             }
             productDTOList.add(productDTO);
@@ -50,14 +57,35 @@ public class ProductService extends AbstractService {
     @Transactional(readOnly = true)
     public ProductDTO getById(long id){
         Product product = daoList.getProductDao().getById(id);
-        ProductDTO productDTO = ProductConverter.toDTO(product);
-        return productDTO;
+        return ProductConverter.toDTO(product);
     }
 
     @Transactional(readOnly = true)
     public Pagination getPagination(int itemsPerPage, Integer currentPage){
         int total = daoList.getProductDao().getRowCount();
         return getAbstractPagination(pagination, currentPage, total, itemsPerPage);
+    }
+
+    @Transactional
+    public void updateProduct(ProductDTO product){
+        ProductDTO old = getById(product.getId());
+        if(product.getImageURI() == null){
+            product.setImageURI(old.getImageURI());
+        }
+        product.setActive(true);
+        daoList.getProductDao().update(ProductConverter.fromDTO(product));
+    }
+
+    @Transactional
+    public void addNew(ProductDTO product){
+        product.setActive(true);
+        daoList.getProductDao().add(ProductConverter.fromDTO(product));
+    }
+
+    @Transactional
+    public void delete(Long id){
+        Product product = daoList.getProductDao().getById(id);
+        product.setActive(false);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.gmail.shelkovich.anton.service;
 
+import com.gmail.shelkovich.anton.repository.dao.SortOrder;
 import com.gmail.shelkovich.anton.repository.model.Order;
 import com.gmail.shelkovich.anton.repository.model.OrderStatus;
 import com.gmail.shelkovich.anton.service.converter.OrderConverter;
@@ -71,7 +72,12 @@ public class OrderService extends AbstractService {
 
     @Transactional(readOnly = true)
     public List<OrderDTO> getAll(){
-        return OrderConverter.toDTO(daoList.getOrderDao().getAll());
+        return getAll(SortOrder.ASC);
+    }
+
+    @Transactional(readOnly = true)
+    public List<OrderDTO> getAll(SortOrder sortOrder){
+        return OrderConverter.toDTO(daoList.getOrderDao().getAll(sortOrder));
     }
 
     @Transactional(readOnly = true)

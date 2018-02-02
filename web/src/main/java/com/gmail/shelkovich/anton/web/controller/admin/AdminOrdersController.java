@@ -1,5 +1,6 @@
 package com.gmail.shelkovich.anton.web.controller.admin;
 
+import com.gmail.shelkovich.anton.repository.dao.SortOrder;
 import com.gmail.shelkovich.anton.repository.model.OrderStatus;
 import com.gmail.shelkovich.anton.service.OrderService;
 import com.gmail.shelkovich.anton.service.UserService;
@@ -22,7 +23,7 @@ public class AdminOrdersController {
 
     @GetMapping
     public String ordersPage(ModelMap model) throws IOException {
-        model.addAttribute("orders", orderService.getAll());
+        model.addAttribute("orders", orderService.getAll(SortOrder.DESC));
         return "editOrders";
     }
 

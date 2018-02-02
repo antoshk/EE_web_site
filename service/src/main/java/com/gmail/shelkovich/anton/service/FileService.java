@@ -1,6 +1,7 @@
 package com.gmail.shelkovich.anton.service;
 
 import com.gmail.shelkovich.anton.repository.model.PieceOfNews;
+import com.gmail.shelkovich.anton.repository.model.Product;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -98,5 +99,11 @@ public class FileService extends AbstractService {
     public boolean deleteFileByNewsId(Long id){
         PieceOfNews pieceOfNews = daoList.getNewsDao().getById(id);
         return deleteFile("news/"+pieceOfNews.getPhotoURI());
+    }
+
+    @Transactional(readOnly = true)
+    public boolean deleteFileByProductId(Long id){
+        Product product = daoList.getProductDao().getById(id);
+        return deleteFile("products/"+product.getImageURI());
     }
 }

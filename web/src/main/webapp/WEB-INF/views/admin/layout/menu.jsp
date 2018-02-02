@@ -29,7 +29,6 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <security:authorize access="isAuthenticated()">
-                        <li><a href="${pageContext.request.contextPath}/profile">Личный кабинет</a></li>
                         <li><a href="${pageContext.request.contextPath}/logout">Выйти</a></li>
                 </security:authorize>
             </ul>

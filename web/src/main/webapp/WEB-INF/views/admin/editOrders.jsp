@@ -5,7 +5,7 @@
 <div class="row">
     <div class="col-md-12">
         <h3 class="text-primary">
-            Товары
+            Заказы
         </h3>
         <div class="well">
             <c:set var="count" value="0"/>

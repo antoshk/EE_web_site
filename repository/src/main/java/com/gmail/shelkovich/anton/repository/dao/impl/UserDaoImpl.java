@@ -16,12 +16,12 @@ public class UserDaoImpl extends GenericDaoImpl<User, Long> implements UserDao {
 
     @Override
     public User getByEmail(String value) {
-        Query query = sessionFactory.getCurrentSession().createQuery("FROM User WHERE email = :email");
+        Query query = getCurrentSession().createQuery("FROM User WHERE email = :email");
         query.setParameter("email", value);
         return (User) query.uniqueResult();
     }
 
     public List<User> getActive() {
-        return sessionFactory.getCurrentSession().createQuery("FROM " + entityClass.getName() + "WHERE isActive = true").list();
+        return getCurrentSession().createQuery("FROM " + entityClass.getName() + "WHERE isActive = true").list();
     }
 }

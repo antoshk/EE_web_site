@@ -8,6 +8,7 @@ import com.gmail.shelkovich.anton.service.converter.UserConverter;
 import com.gmail.shelkovich.anton.service.model.Pagination;
 import com.gmail.shelkovich.anton.service.model.dto.PieceOfNewsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,9 @@ public class NewsService extends AbstractService {
 
     @Autowired
     private Pagination pagination;
+
+    @Value("${service.news.shortenDescription.length:140}")
+    private Integer shortenBodyLength;
 
     @Autowired
     private UserService userService;
@@ -41,8 +45,8 @@ public class NewsService extends AbstractService {
         for (PieceOfNews pieceOfNews : news) {
             PieceOfNewsDTO pieceOfNewsDTO = NewsConverter.toDTO(pieceOfNews, false);
             String body = pieceOfNewsDTO.getNewsBody();
-            if (body.length() > 140) {
-                body = body.substring(0, 140) + "...";
+            if (body.length() > shortenBodyLength) {
+                body = body.substring(0, shortenBodyLength) + "...";
                 pieceOfNewsDTO.setNewsBody(body);
             }
             newsDTO.add(pieceOfNewsDTO);

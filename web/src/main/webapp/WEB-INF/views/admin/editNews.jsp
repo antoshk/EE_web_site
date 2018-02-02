@@ -45,4 +45,20 @@
         </div>
     </div>
 </div>
-
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-1">
+        <c:if test="${pagination.getPrevPage() != 0}">
+            <a href="${pageContext.request.contextPath}/admin/news/page/${pagination.getPrevPage()}" class="btn btn-default" type="button"><</a>
+        </c:if>
+    </div>
+    <div class="col-md-2">
+        Страница <c:out value="${pagination.getCurrentPage()}"/> из <c:out value="${pagination.getTotalPages()}"/>
+    </div>
+    <div class="col-md-1">
+        <c:if test="${pagination.getNextPage() != 0}">
+            <a href="${pageContext.request.contextPath}/admin/news/page/${pagination.getNextPage()}" class="btn btn-default" type="button">></a>
+        </c:if>
+    </div>
+    <div class="col-md-4"></div>
+</div>

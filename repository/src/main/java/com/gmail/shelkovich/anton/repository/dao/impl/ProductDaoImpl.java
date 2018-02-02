@@ -17,7 +17,7 @@ public class ProductDaoImpl extends GenericDaoImpl<Product, Long> implements Pro
 
     @Override
     public List<Product> getPage(int count, int page, SortOrder sortOrder) {
-        Query query = sessionFactory.getCurrentSession().createQuery("FROM " + entityClass.getName() + " WHERE isActive = true ORDER BY " + OrderToInstruction(sortOrder));
+        Query query = getCurrentSession().createQuery("FROM " + entityClass.getName() + " WHERE isActive = true ORDER BY " + OrderToInstruction(sortOrder));
         query.setMaxResults(count);
         query.setFirstResult((page - 1) * count);
         return query.list();
@@ -25,17 +25,17 @@ public class ProductDaoImpl extends GenericDaoImpl<Product, Long> implements Pro
 
     @Override
     public Product getById(Long id) {
-        return (Product) sessionFactory.getCurrentSession().createQuery("FROM  " + entityClass.getName() + " WHERE isActive = true AND id = '" + id + "'").uniqueResult();
+        return (Product) getCurrentSession().createQuery("FROM  " + entityClass.getName() + " WHERE isActive = true AND id = '" + id + "'").uniqueResult();
     }
 
     @Override
     public List<Product> getAll() {
-        return sessionFactory.getCurrentSession().createQuery("FROM " + entityClass.getName() +" WHERE isActive = true").list();
+        return getCurrentSession().createQuery("FROM " + entityClass.getName() +" WHERE isActive = true").list();
     }
 
     @Override
     public Integer getRowCount(){
-        String countStr = sessionFactory.getCurrentSession().createQuery("SELECT COUNT(*) as count FROM " + entityClass.getName()+" WHERE isActive = true").uniqueResult().toString();
+        String countStr = getCurrentSession().createQuery("SELECT COUNT(*) as count FROM " + entityClass.getName()+" WHERE isActive = true").uniqueResult().toString();
         Integer count = null;
         try {
             count = Integer.parseInt(countStr);
@@ -50,7 +50,7 @@ public class ProductDaoImpl extends GenericDaoImpl<Product, Long> implements Pro
         if (bean == null) {
             return false;
         }
-        if (sessionFactory.getCurrentSession().contains(bean)) {
+        if (getCurrentSession().contains(bean)) {
             bean.setActive(false);
         } else {
             Product associatedBean = getById(bean.getId());

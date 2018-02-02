@@ -10,6 +10,8 @@ public interface GenericDao<T extends Serializable, ID extends Number> {
 
     List<T> getAll();
 
+    List<T> getAll(SortOrder sortOrder);
+
     boolean delete(T bean);
 
     boolean delete(ID id);

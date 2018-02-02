@@ -2,10 +2,10 @@ package com.gmail.shelkovich.anton.web.controller.admin;
 
 import com.gmail.shelkovich.anton.service.FileService;
 import com.gmail.shelkovich.anton.service.NewsService;
-import com.gmail.shelkovich.anton.service.UserService;
 import com.gmail.shelkovich.anton.service.model.dto.PieceOfNewsDTO;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -22,17 +22,31 @@ public class AdminNewsController {
     private static final Logger logger = Logger.getLogger(AdminNewsController.class);
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
     private NewsService newsService;
+
+    @Value("${controller.newsPerAdminPage:20}")
+    private Integer newsPerPage;
 
     @Autowired
     private FileService fileService;
 
+//    @GetMapping
+//    public String newsPage(ModelMap model) throws IOException {
+//        model.addAttribute("news", newsService.getAll());
+//        return "editNews";
+//    }
+
     @GetMapping
-    public String newsPage(ModelMap model) throws IOException {
-        model.addAttribute("news", newsService.getAll());
+    public String newsFirstPage(ModelMap model) throws IOException {
+        model.addAttribute("news", newsService.getShortenNewsByPage(newsPerPage, null));
+        model.addAttribute("pagination", newsService.getPagination(newsPerPage, null));
+        return "editNews";
+    }
+
+    @GetMapping(value = "/page/{page}")
+    public String newsNPage(@PathVariable Integer page, ModelMap model) throws IOException {
+        model.addAttribute("news", newsService.getShortenNewsByPage(newsPerPage, page));
+        model.addAttribute("pagination", newsService.getPagination(newsPerPage, page));
         return "editNews";
     }
 

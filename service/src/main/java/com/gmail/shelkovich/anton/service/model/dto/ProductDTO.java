@@ -1,4 +1,6 @@
 package com.gmail.shelkovich.anton.service.model.dto;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.math.BigDecimal;
 
 public class ProductDTO {
@@ -8,6 +10,7 @@ public class ProductDTO {
     private BigDecimal price;
     private String imageURI;
     private Boolean isActive;
+    private MultipartFile image;
 
     public Long getId() {
         return id;
@@ -55,6 +58,14 @@ public class ProductDTO {
 
     public void setActive(Boolean active) {
         isActive = active;
+    }
+
+    public MultipartFile getImage() {
+        return image;
+    }
+
+    public void setImage(MultipartFile image) {
+        this.image = image;
     }
 
     @Override

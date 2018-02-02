@@ -1,9 +1,17 @@
 package com.gmail.shelkovich.anton.service.model.dto;
 
+import org.hibernate.validator.constraints.Email;
+
+import javax.validation.constraints.Size;
+
 public class FeedbackDTO {
 
     private Long id;
+
+    @Email(message = "{feedback.email.invalid}")
     private String email;
+
+    @Size(min=1, max=2000, message = "{feedback.tooLongValue}")
     private String message;
 
     public Long getId() {
