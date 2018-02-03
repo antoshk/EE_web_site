@@ -3,6 +3,7 @@ package com.gmail.shelkovich.anton.repository.dao.impl;
 import com.gmail.shelkovich.anton.repository.dao.ProductDao;
 import com.gmail.shelkovich.anton.repository.dao.SortOrder;
 import com.gmail.shelkovich.anton.repository.model.Product;
+import org.apache.log4j.Logger;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +11,8 @@ import java.util.List;
 
 @Repository("productDAO")
 public class ProductDaoImpl extends GenericDaoImpl<Product, Long> implements ProductDao {
+
+    private static final Logger logger = Logger.getLogger(ProductDaoImpl.class);
 
     public ProductDaoImpl() {
         super(Product.class);
@@ -40,7 +43,7 @@ public class ProductDaoImpl extends GenericDaoImpl<Product, Long> implements Pro
         try {
             count = Integer.parseInt(countStr);
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
         return count;
     }

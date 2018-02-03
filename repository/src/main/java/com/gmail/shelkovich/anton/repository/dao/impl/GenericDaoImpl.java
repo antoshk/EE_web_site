@@ -2,6 +2,7 @@ package com.gmail.shelkovich.anton.repository.dao.impl;
 
 import com.gmail.shelkovich.anton.repository.dao.GenericDao;
 import com.gmail.shelkovich.anton.repository.dao.SortOrder;
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -13,6 +14,8 @@ import java.util.List;
 
 @Component
 public abstract class GenericDaoImpl<T extends Serializable, ID extends Number> implements GenericDao<T, ID> {
+
+    private static final Logger logger = Logger.getLogger(GenericDaoImpl.class);
 
     final Class<T> entityClass;
 
@@ -79,7 +82,7 @@ public abstract class GenericDaoImpl<T extends Serializable, ID extends Number> 
         try {
             count = Integer.parseInt(countStr);
         }catch (Exception e){
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         }
         return count;
     }

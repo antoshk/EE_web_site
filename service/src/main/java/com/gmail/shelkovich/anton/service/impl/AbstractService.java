@@ -1,4 +1,4 @@
-package com.gmail.shelkovich.anton.service;
+package com.gmail.shelkovich.anton.service.impl;
 
 import com.gmail.shelkovich.anton.repository.dao.DaoList;
 import com.gmail.shelkovich.anton.service.model.Pagination;

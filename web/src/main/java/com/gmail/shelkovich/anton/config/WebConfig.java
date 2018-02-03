@@ -31,14 +31,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Autowired
     private ServletContext servletContext;
 
-//    @Bean
-//    public ViewResolver getViewResolver(){
-//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-//        resolver.setPrefix("/WEB-INF/views/");
-//        resolver.setSuffix(".jsp");
-//        return resolver;
-//    }
-
     @Bean
     public TilesViewResolver getTilesViewResolver() {
         TilesViewResolver tilesViewResolver = new TilesViewResolver();

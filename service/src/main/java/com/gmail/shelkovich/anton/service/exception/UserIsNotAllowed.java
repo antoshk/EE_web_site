@@ -1,4 +1,4 @@
-package com.gmail.shelkovich.anton.service.converter.exception;
+package com.gmail.shelkovich.anton.service.exception;
 
 public class UserIsNotAllowed extends RuntimeException {
     public UserIsNotAllowed() {
