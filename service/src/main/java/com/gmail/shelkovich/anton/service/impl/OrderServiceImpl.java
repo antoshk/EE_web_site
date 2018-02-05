@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class OrderServiceImpl extends AbstractService implements OrderService {
@@ -94,7 +95,7 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
     @Transactional(readOnly = true)
     public boolean isCurrentUserOrderOwner(Long orderId){
         for(OrderDTO order: getCurrentUserOrders()){
-            if(order.getId().equals(orderId)) return true;
+            if (Objects.equals(order.getId(), orderId)) return true;
         }
         return false;
     }
@@ -103,7 +104,7 @@ public class OrderServiceImpl extends AbstractService implements OrderService {
     @Transactional
     public void deleteOrder(Long orderId){
         Order order = daoList.getOrderDao().getById(orderId);
-        if(order.getStatus().equals(OrderStatus.NEW)){
+        if(order.getStatus() == OrderStatus.NEW){
             daoList.getOrderDao().delete(orderId);
         }
 

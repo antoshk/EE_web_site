@@ -1,7 +1,7 @@
 # Course project
 
 ### Overview
-Web application with functionality of e-shop. Created while studying at <a href="https://www.it-academy.by/">Education Center of High Technologies Park</a> on <a href="https://www.it-academy.by/course/java-developer/jd2-tekhnologii-razrabotki-enterprise-resheniy-na-java/">"Technologies for developing enterprise solutions on JAVA"</a> course.
+Web application with functionality of online shop. Created while studying at <a href="https://www.it-academy.by/">Education Center of High-Tech Park</a> on <a href="https://www.it-academy.by/course/java-developer/jd2-tekhnologii-razrabotki-enterprise-resheniy-na-java/">"Technologies for developing enterprise solutions on JAVA"</a> course.
 
 Application was made mostly using Hibernate, Spring MVC and Spring Security. Additionally it uses Apache Tiles, fields validation, AJAX queries and even some localization  
 
@@ -30,7 +30,7 @@ mvn clean install -Pinit_database
 ````
 
 ### How to run
-Deploy built EEShop.war to Tomcat server and open http://localhost:8080/ee-shop/ in browser
+To run the application you need Tomcat 7 or higher and MySQL 5.x server. Deploy built EEShop.war to Tomcat server and open http://localhost:8080/ee-shop/ in browser
 
 ### How to use
 There are three users with password "123456":

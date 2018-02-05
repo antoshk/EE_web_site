@@ -1,7 +1,6 @@
 package com.gmail.shelkovich.anton.service.impl;
 
 import com.gmail.shelkovich.anton.service.UserService;
-import com.gmail.shelkovich.anton.service.exception.UserIsNotAllowed;
 import com.gmail.shelkovich.anton.service.model.AppUserDetails;
 import com.gmail.shelkovich.anton.service.model.dto.UserDTO;
 import org.apache.log4j.Logger;
@@ -27,10 +26,6 @@ public class AppUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(email);
         }
 
-        if(!user.getActive()){
-            logger.info("While authorization User "+email+" is blocked");
-            throw new UserIsNotAllowed("User "+user.getId()+" is blocked");
-        }
-        return new AppUserDetails(user);
+        return new AppUserDetails(user.getId());
     }
 }

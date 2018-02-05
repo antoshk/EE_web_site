@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ProductDao extends GenericDao<Product, Long> {
     List<Product> getPage(int count, int page, SortOrder sortOrder);
+
+    boolean hardDelete(Product bean);
 }

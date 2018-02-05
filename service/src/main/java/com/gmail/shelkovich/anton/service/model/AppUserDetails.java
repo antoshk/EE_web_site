@@ -1,6 +1,7 @@
 package com.gmail.shelkovich.anton.service.model;
 
-import com.gmail.shelkovich.anton.service.model.dto.UserDTO;
+import com.gmail.shelkovich.anton.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,20 +11,20 @@ import java.util.Collections;
 
 public class AppUserDetails implements UserDetails {
 
-    private UserDTO userDTO;
+    private Long userId;
     private Collection<GrantedAuthority> grantedAuthorities;
 
-    public AppUserDetails(UserDTO userDTO){
-        this.userDTO = userDTO;
-        this.grantedAuthorities = Collections.singletonList(new SimpleGrantedAuthority(userDTO.getRole().name()));
-    }
+    @Autowired
+    private UserService userService;
 
-    public UserDTO getUserDTO() {
-        return userDTO;
+    public AppUserDetails(Long userId){
+        this.userId = userId;
+        String authority = userService.getById(userId).getRole().name();
+        this.grantedAuthorities = Collections.singletonList(new SimpleGrantedAuthority(authority));
     }
 
     public Long getUserId(){
-        return userDTO.getId();
+        return userId;
     }
 
     @Override
@@ -33,12 +34,12 @@ public class AppUserDetails implements UserDetails {
 
     @Override
     public String getPassword() {
-        return userDTO.getPassword();
+        return userService.getById(userId).getPassword();
     }
 
     @Override
     public String getUsername() {
-        return userDTO.getEmail();
+        return userService.getById(userId).getEmail();
     }
 
     @Override
@@ -48,7 +49,7 @@ public class AppUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return userService.getById(userId).getActive();
     }
 
     @Override

@@ -12,8 +12,10 @@ public interface UserService {
     @Transactional(readOnly = true)
     UserDTO getByEmail(String email);
 
+    @Transactional(readOnly = true)
     UserDTO getCurrentUser();
 
+    @Transactional(readOnly = true)
     String getCurrentUsername();
 
     @Transactional
@@ -21,6 +23,12 @@ public interface UserService {
 
     @Transactional
     UserDTO updateUser(UserDTO userDTO);
+
+    @Transactional
+    UserDTO updateUserProfile(UserDTO userDTO);
+
+    @Transactional
+    UserDTO updateUserPassword(UserDTO userDTO);
 
     @Transactional
     void deleteUser(Long id);

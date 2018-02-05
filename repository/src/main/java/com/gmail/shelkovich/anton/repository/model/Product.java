@@ -1,11 +1,14 @@
 package com.gmail.shelkovich.anton.repository.model;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "t_products")
+@Where(clause = "f_is_active = true")
 public class Product implements Serializable {
     private static final long serialVersionUID = 492276078161085568L;
 

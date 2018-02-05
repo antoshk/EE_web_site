@@ -46,7 +46,6 @@ public class ProductDaoImplTest {
             assertEquals(newProduct.getId(), product.getId());
 
             assertTrue(productDao.delete(newProduct));
-            assertNull(productDao.getById(newProduct.getId()));
             products = productDao.getAll();
             assertFalse(products.contains(newProduct));
 

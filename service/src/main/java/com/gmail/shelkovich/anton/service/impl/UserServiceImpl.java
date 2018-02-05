@@ -41,22 +41,26 @@ public class UserServiceImpl extends AbstractService implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public UserDTO getCurrentUser(){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (principal instanceof AppUserDetails) {
-            return ((AppUserDetails)principal).getUserDTO();
+            Long userId = ((AppUserDetails)principal).getUserId();
+            return getById(userId);
         } else {
             return null;
         }
     }
 
     @Override
+    @Transactional(readOnly = true)
     public String getCurrentUsername(){
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         if (principal instanceof AppUserDetails) {
-            return ((AppUserDetails)principal).getUserDTO().getFullName();
+            Long userId = ((AppUserDetails)principal).getUserId();
+            return getById(userId).getFullName();
         } else {
             return principal.toString();
         }
@@ -75,6 +79,25 @@ public class UserServiceImpl extends AbstractService implements UserService {
         user.setOrders(daoList.getUserDao().getById(user.getId()).getOrders());
         User updatedUser = daoList.getUserDao().update(user);
         return UserConverter.toDTO(updatedUser,false);
+    }
+
+    @Override
+    @Transactional
+    public UserDTO updateUserProfile(UserDTO userDTO){
+        User user = daoList.getUserDao().getById(userDTO.getId());
+        user.setPhone(userDTO.getPhone());
+        user.setFullName(userDTO.getFullName());
+        user.setAddress(userDTO.getAddress());
+        user.setAdditionalInfo(userDTO.getAdditionalInfo());
+        return UserConverter.toDTO(user, false);
+    }
+
+    @Override
+    @Transactional
+    public UserDTO updateUserPassword(UserDTO userDTO){
+        User user = daoList.getUserDao().getById(userDTO.getId());
+        user.setPassword(userDTO.getPassword());
+        return UserConverter.toDTO(user,false);
     }
 
     @Override
@@ -107,5 +130,7 @@ public class UserServiceImpl extends AbstractService implements UserService {
         }
         return userDTOs;
     }
+
+
 
 }

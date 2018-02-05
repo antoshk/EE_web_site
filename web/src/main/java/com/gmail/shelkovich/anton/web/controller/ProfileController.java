@@ -1,15 +1,11 @@
 package com.gmail.shelkovich.anton.web.controller;
 
 import com.gmail.shelkovich.anton.service.UserService;
-import com.gmail.shelkovich.anton.service.model.AppUserDetails;
 import com.gmail.shelkovich.anton.service.model.dto.UserDTO;
 import com.gmail.shelkovich.anton.web.controller.validator.UserValidator;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -64,16 +60,8 @@ public class ProfileController {
                 }
             }
         }
-        UserDTO currentUser = userService.getCurrentUser();
-        user.setId(currentUser.getId());
-        user.setEmail(currentUser.getEmail());
-        user.setPassword(currentUser.getPassword());
-        user.setActive(currentUser.getActive());
-        user.setRole(currentUser.getRole());
-        logger.info("User fullName: "+ user.getFullName());
-        UserDTO updatedUser = userService.updateUser(user);
-        Authentication authentication = new PreAuthenticatedAuthenticationToken(new AppUserDetails(updatedUser), updatedUser.getPassword(), SecurityContextHolder.getContext().getAuthentication().getAuthorities());
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        user.setId(userService.getCurrentUser().getId());
+        userService.updateUserProfile(user);
         return "redirect:/profile";
     }
 
@@ -93,9 +81,8 @@ public class ProfileController {
                 }
             }
         }
-        UserDTO currentUser = userService.getCurrentUser();
-        currentUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        userService.updateUser(currentUser);
+        user.setId(userService.getCurrentUser().getId());
+        userService.updateUserPassword(user);
         return "redirect:/profile";
     }
 
